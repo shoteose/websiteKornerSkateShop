@@ -1,13 +1,16 @@
 <?php
+
 namespace app\core;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-class Db {
+class Db
+{
     private $client;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->client = new Client([
             'base_uri' => 'http://localhost:3000/api/', // URL base da API
             'timeout'  => 5.0, // Timeout em segundos
@@ -20,13 +23,15 @@ class Db {
      * @param string $endpoint Endpoint da API
      * @return array|null Resposta da API em formato de array ou null em caso de erro
      */
-    public function execGet(string $endpoint) {
+    public function execGet(string $endpoint)
+    {
         try {
             $response = $this->client->get($endpoint);
             return json_decode($response->getBody()->getContents(), true);
         } catch (RequestException $e) {
-            echo "Erro na requisição GET: " . $e->getMessage();
-            return null;
+            //echo "Erro na requisição GET: " . $e->getMessage();
+            $mes = $e->getMessage();
+            return $mes;
         }
     }
 
@@ -37,15 +42,28 @@ class Db {
      * @param array $data Dados a serem enviados
      * @return array|null Resposta da API em formato de array ou null em caso de erro
      */
-    public function execPost(string $endpoint, array $data) {
+    public function execPost(string $endpoint, array $data)
+    {
         try {
             $response = $this->client->post($endpoint, [
                 'json' => $data, // Dados enviados como JSON
             ]);
             return json_decode($response->getBody()->getContents(), true);
         } catch (RequestException $e) {
-            echo "Erro na requisição POST: " . $e->getMessage();
-            return null;
+            // Verifica se há uma resposta da API no erro
+            $errorResponse = $e->getResponse();
+            if ($errorResponse) {
+                $errorBody = json_decode($errorResponse->getBody()->getContents(), true);
+                return [
+                    'error' => true,
+                    'message' => $errorBody['message'] ?? 'Erro desconhecido.'
+                ];
+            }
+            // Caso não haja uma resposta da API, retorna um erro genérico
+            return [
+                'error' => true,
+                'message' => 'Erro ao se conectar com o servidor.'
+            ];
         }
     }
 
@@ -55,7 +73,8 @@ class Db {
      * @param string $endpoint Endpoint da API
      * @return array|null Resposta da API em formato de array ou null em caso de erro
      */
-    public function execDelete(string $endpoint) {
+    public function execDelete(string $endpoint)
+    {
         try {
             $response = $this->client->delete($endpoint);
             return json_decode($response->getBody()->getContents(), true);
@@ -72,7 +91,8 @@ class Db {
      * @param array $data Dados a serem enviados
      * @return array|null Resposta da API em formato de array ou null em caso de erro
      */
-    public function execPut(string $endpoint, array $data) {
+    public function execPut(string $endpoint, array $data)
+    {
         try {
             $response = $this->client->put($endpoint, [
                 'json' => $data,

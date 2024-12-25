@@ -14,22 +14,70 @@
 
 </head>
 
-<body id="index">
-  <div class="row mt-3" id="botoes">
-    <div class="d-flex flex-column">
+<body>
 
-      <?php if (!isset($_SESSION['user_id_acess'])) {
+  <!-- INICIO DA NAVBAR -->
+  <nav class="navbar navbar-expand-sm navbar-light bg-light rounded sticky-header header-clone icons-design-line color-scheme-dark act-scroll " aria-label="NavBar">
+    <div class="container-fluid">
+      <a href="<?php echo $url_alias; ?>/">
+      <img class="navbar-brand img-fluid" src="<?php echo $url_alias; ?>/assets/logos/loja/logoLoja.jpg" href="<?php echo $url_alias;?>" style="width: 75px; height: auto;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        echo '<a href="' . $url_alias . '/contas" class="btn btn-md btn-custom mb-2">Login</a>';
-      } else {
+      <div class="collapse navbar-collapse" id="navbarsExample03">
+        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Homem</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Mulher</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <?php foreach ($data['categorias'] as $categoria) {
+                echo '<li><a class="dropdown-item" href="' . $url_alias . '/categoria/get/' . $categoria['id'] . '">' . $categoria['descricao'] . '</a></li>';
+              } ?>
 
-        echo '<a href="' . $url_alias . '/contas/logout" onclick="logout()" class="btn btn-md btn-custom mb-2">Logout</a>';
-      } ?>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sales %</a>
+          </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="#">Loja 3D</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Blog</a>
+          </li>
+          <li class="nav-item">
+            <?php if (!isset($_SESSION['user_id_acess'])) { ?>
+              <a href="<?php echo $url_alias; ?>/contas">
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/login.svg" class="img-fluid">
+              </a>
+            <?php } else { ?>
+              <a href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
+              </a>
+            <?php } ?>
+          </li>
+
+
+        </ul>
+      </div>
     </div>
-  </div>
+  </nav>
 
-<?php foreach ($data['roupas'] as $peca) {
+  <!-- FIM DA NAVBAR -->
+  <!-- INICIO DO CONTEUDO -->
+
+  <div class="container">
+
+    <?php /*foreach ($data['roupas'] as $peca) {
 
 echo '<div class="col roupa-item">';
 echo '<div class="card bg-dark shadow-sm h-100">';
@@ -49,13 +97,46 @@ echo '</div>';
 echo '</div>';
 echo '</div>';
 echo '</div>';
-} ?>
+} */ ?>
 
   </div>
 
+  <!-- FIM DO CONTEUDO -->
+  <!-- FOOTER -->
+
+  <footer class="py-5">
+    <div>
+      <div class="row d-flex justify-content-center align-items-center text-center">
+        <div class="col-6 col-md-2 mb-3">
+          <h5>SOBRE NÓS</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Korner Skate Shop</a></li>
+            <li class="nav-item mb-2"><a href="https://www.livroreclamacoes.pt/Pedido/Reclamacao" class="nav-link p-0 text-muted">Livro de Reclamações</a></li>
+            <li class="nav-item mb-2"><a href="https://www.livroreclamacoes.pt/Pedido/ElogioSugestao" class="nav-link p-0 text-muted">Livro de Elogios</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2 mb-3">
+          <h5>INFORMAÇÃO</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Termos e Condições</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Política de Privacidade</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2 mb-3">
+          <h5>REDES SOCIAIS</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="https://www.facebook.com/KornerSkateShop/" class="nav-link p-0 text-muted">Facebook</a></li>
+            <li class="nav-item mb-2"><a href="https://www.instagram.com/kornerskateshop" class="nav-link p-0 text-muted">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <p>© 2024 Korner Skate Shop, Todos Direitos Reservados.</p>
+    </div>
+  </footer>
 
   <!-- Scripts -->
-  <script src="<?php echo $url_alias ?>/assets/js/scripts.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>

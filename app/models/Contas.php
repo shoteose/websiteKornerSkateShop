@@ -4,10 +4,12 @@ namespace app\models;
 
 use app\core\Db;
 
-class Contas {
+class Contas
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Db(); // Usa o novo Db para consumir a API
     }
 
@@ -16,22 +18,31 @@ class Contas {
      *
      * @return array|null
      */
-    public function getContas() {
+    public function getContas()
+    {
         return $this->db->execGet('user/');
     }
 
-    public function login($conta){
-
-      return $this->db->execPost('user/login/', $conta);
-
+    public function login($conta) {
+        $response = $this->db->execPost('user/login/', $conta);
+    
+        if (isset($response['error']) && $response['error'] === true) {
+            // Retorna o erro para o controlador
+            return $response;
+        }
+    
+        return $response; // Retorna os dados do usuário em caso de sucesso
     }
+    
+
     /**
      * Obter uma conta por ID
      *
      * @param int $id
      * @return array|null
      */
-    public function getContaById(int $id) {
+    public function getContaById(int $id)
+    {
         return $this->db->execGet("user/$id");
     }
 
@@ -41,7 +52,8 @@ class Contas {
      * @param array $data
      * @return array|null
      */
-    public function addConta(array $data) {
+    public function addConta(array $data)
+    {
         return $this->db->execPost('user/', $data);
     }
 
@@ -51,8 +63,8 @@ class Contas {
      * @param int $id
      * @return array|null
      */
-    public function deleteConta(int $id) {
+    public function deleteConta(int $id)
+    {
         return $this->db->execDelete("user/$id");
     }
 }
-
