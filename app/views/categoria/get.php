@@ -1,14 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?php echo $url_alias ?>/assets/css/style.css">
     <title>Korner Skate Shop</title>
-    <link rel="stylesheet" href="<?php echo $url_alias; ?>/assets/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -76,42 +79,44 @@
     <!-- INICIO DO CONTEUDO -->
 
     <div class="container">
-
-        <form action="<?php echo $url_alias; ?>/contas/index" method="POST" enctype="multipart/form-data">
-            <h2 class="text-center mb-4">Login</h2>
-
-            <!-- Mensagem de erro -->
-            <?php  if (!empty($data['error'])){ ?>
-                <div class="alert alert-danger text-center" role="alert">
-                    <?php echo $data['error']; ?>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 pt-4">
+            <?php foreach ($data['roupas'] as $peca) { ?>
+                <div class="col">
+                    <a href="<?php echo $url_alias ?>/pecas/detalhes/<?php echo $peca['id']?>" class="text-decoration-none text-reset">
+                        <div class="card text-black h-100">
+                            <img src="<?php echo $url_alias ?>/assets/img/roupas/<?php echo $peca['nome'] ?>_0.png"
+                                class="card-img-top" alt="Peca <?php echo $peca['nome'] ?>" />
+                            <div class="card-body d-flex flex-column">
+                                <div class="text-center">
+                                    <h5 class="card-title"><?php echo $peca['nome'] ?></h5>
+                                    <p class="text-muted mb-4"><?php echo $peca['marca'] ?></p>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Genero</span><span><?php echo $peca['genero'] ?></span>
+                                    </div>
+                                    <?php if ($peca['taxa_desconto'] > 0) { ?>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Preco Original</span>
+                                            <span><?php echo number_format(($peca['preco'] * (1 - ($peca['taxa_iva'] / 100))), 2, ",", "") ?> €</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Preco com o desconto</span>
+                                            <span><?php echo number_format(($peca['preco'] * (1 - ($peca['taxa_iva'] / 100))) * (1 - ($peca['taxa_desconto'] / 100)), 2, ",", "") ?> €</span>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Preco</span><span><?php echo number_format(($peca['preco'] * (1 - $peca['taxa_iva'])), 2, ",", "") ?> €</span>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            <?php }; ?>
-
-
-            <!-- Email -->
-            <div class="form-outline mb-4">
-                <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email" />
-                <label class="form-label" for="email">Endereço Email</label>
-            </div>
-
-            <!-- Password -->
-            <div class="form-outline mb-3">
-                <input type="password" id="password" class="form-control form-control-lg" placeholder="Insira a password" name="password" />
-                <label class="form-label" for="password">Password</label>
-            </div>
-
-            <!-- Botão de Login -->
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Login</button>
-            </div>
-
-            <p class="text-center small fw-bold mt-4">
-                Nao tens Conta? <a href="<?php echo $url_alias;?>/contas/registo" class="link-danger">Cria</a>
-            </p>
-        </form>
-
+            <?php } ?>
+        </div>
     </div>
-
 
     <!-- FIM DO CONTEUDO -->
     <!-- FOOTER -->
@@ -148,7 +153,11 @@
         </div>
     </footer>
 
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
+
 
 </html>

@@ -4,10 +4,12 @@ namespace app\models;
 
 use app\core\Db;
 
-class Pecas {
+class Pecas
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Db(); // Usa o novo Db para consumir a API
     }
 
@@ -16,9 +18,28 @@ class Pecas {
      *
      * @return array|null
      */
-    public function getPecas() {
+    public function getPecas()
+    {
         return $this->db->execGet('peca/');
     }
 
+    public function getPecaById(int $id)
+    {
+        return $this->db->execGet("peca/$id");
     }
 
+    public function getPecasByCategoriaId($id)
+    {
+        return $this->db->execGet("peca/categoria/$id");
+    }
+
+    public function getPecasByGeneroId($id)
+    {
+        return $this->db->execGet("peca/categoria/$id");
+    }
+
+    public function getPecasComDesconto()
+    {
+        return $this->db->execGet('peca/sales');
+    }
+}

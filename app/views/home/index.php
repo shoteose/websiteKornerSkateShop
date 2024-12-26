@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="<?php echo $url_alias ?>/assets/css/style.css">
-  <title>GamesList</title>
+  <title>Korner Skate Shop</title>
 
 </head>
 
@@ -20,7 +20,7 @@
   <nav class="navbar navbar-expand-sm navbar-light bg-light rounded sticky-header header-clone icons-design-line color-scheme-dark act-scroll " aria-label="NavBar">
     <div class="container-fluid">
       <a href="<?php echo $url_alias; ?>/">
-      <img class="navbar-brand img-fluid" src="<?php echo $url_alias; ?>/assets/logos/loja/logoLoja.jpg" href="<?php echo $url_alias;?>" style="width: 75px; height: auto;">
+        <img class="navbar-brand img-fluid" src="<?php echo $url_alias; ?>/assets/logos/loja/logoLoja.jpg" href="<?php echo $url_alias; ?>" style="width: 55px; height: auto;">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,11 +28,14 @@
 
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Homem</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Mulher</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Genêros</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <?php foreach ($data['generos'] as $genero) {
+                echo '<li><a class="dropdown-item" href="' . $url_alias . '/categoria/get/' . $genero['id'] . '">' . $genero['descricao'] . '</a></li>';
+              } ?>
+
+            </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
@@ -44,7 +47,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sales %</a>
+            <a class="nav-link" href="<?php echo $url_alias; ?>/sales/">Sales %</a>
           </li>
 
           <li class="nav-item">

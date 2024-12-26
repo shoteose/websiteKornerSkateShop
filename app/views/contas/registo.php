@@ -77,8 +77,8 @@
 
     <div class="container">
 
-        <form action="<?php echo $url_alias; ?>/contas/index" method="POST" enctype="multipart/form-data">
-            <h2 class="text-center mb-4">Login</h2>
+        <form action="<?php echo $url_alias; ?>/contas/registo" method="POST" enctype="multipart/form-data">
+            <h2 class="text-center mb-4">Registo</h2>
 
             <!-- Mensagem de erro -->
             <?php  if (!empty($data['error'])){ ?>
@@ -100,14 +100,11 @@
                 <label class="form-label" for="password">Password</label>
             </div>
 
-            <!-- Botão de Login -->
+            <!-- Botão de Criar Conta -->
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                <button type="submit" class="btn btn-primary btn-lg">Criar Conta</button>
             </div>
 
-            <p class="text-center small fw-bold mt-4">
-                Nao tens Conta? <a href="<?php echo $url_alias;?>/contas/registo" class="link-danger">Cria</a>
-            </p>
         </form>
 
     </div>

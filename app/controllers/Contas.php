@@ -52,7 +52,7 @@ class Contas extends Controller
     exit();
   }
 
-  public function register()
+  public function registo()
   {
     $contas = $this->model('Contas');
     $categorias = $this->model('Categoria');
@@ -71,14 +71,14 @@ class Contas extends Controller
         $_SESSION['user_id_acess'] = $conta['id_tipoUser'];
         $_SESSION['user_ID'] = $conta['id'];
 
-        header("Location: /websiteKornerSkateShop/");
+        header("Location: /websiteKornerSkateShop/contas");
         exit();
       } else {
        //var_dump($conta);
-        $this->view('contas/register', [ 'categorias' => $categoria,'error' => 'Acessos errados']);
+        $this->view('contas/registo', [ 'categorias' => $categoria,'error' => 'Acessos errados']);
       }
     } else {
-      $this->view('contas/register');
+      $this->view('contas/registo', ['categorias' => $categoria]);
     }
   }
 }
