@@ -9,8 +9,11 @@ class Contas extends Controller
   public function index() {
     $contas = $this->model('Contas');
     $categorias = $this->model('Categoria');
-
+    $marcas = $this->model('Marca');
+    $marca = $marcas->getMarcas();
     $categoria = $categorias->getCategorias();
+    $generos = $this->model('Genero');
+    $genero = $generos->getGeneros();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = [
@@ -31,13 +34,13 @@ class Contas extends Controller
             // Login falhou, passa o erro para a view
             $error = $conta['message'] ?? 'Erro desconhecido.';
             $this->view('contas/index', [
-                'categorias' => $categoria,
+                'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca,
                 'error' => $error
             ]);
         }
     } else {
         // view nromal
-        $this->view('contas/index', ['categorias' => $categoria]);
+        $this->view('contas/index', ['categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
     }
 }
 
@@ -56,8 +59,11 @@ class Contas extends Controller
   {
     $contas = $this->model('Contas');
     $categorias = $this->model('Categoria');
-
+    $marcas = $this->model('Marca');
+    $marca = $marcas->getMarcas();
     $categoria = $categorias->getCategorias();
+    $generos = $this->model('Genero');
+    $genero = $generos->getGeneros();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $user = [
@@ -67,7 +73,7 @@ class Contas extends Controller
 
       $conta = $contas->addConta($user);
 
-      if (!empty($conta)) {
+      if (!empty($conta) && $user['email'] != null && $user['pass'] != null) {
         $_SESSION['user_id_acess'] = $conta['id_tipoUser'];
         $_SESSION['user_ID'] = $conta['id'];
 
@@ -75,10 +81,10 @@ class Contas extends Controller
         exit();
       } else {
        //var_dump($conta);
-        $this->view('contas/registo', [ 'categorias' => $categoria,'error' => 'Acessos errados']);
+        $this->view('contas/registo', [ 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca,'error' => 'Acessos errados']);
       }
     } else {
-      $this->view('contas/registo', ['categorias' => $categoria]);
+      $this->view('contas/registo', ['categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
     }
   }
 }

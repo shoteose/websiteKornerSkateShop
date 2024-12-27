@@ -13,10 +13,12 @@ class Categoria extends Controller
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
             $peca = $pecas->getPecasByCategoriaId($id);
             $categoria = $categorias->getCategorias($id);
 
-            $this->view('categoria/get', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero]);
+            $this->view('categoria/get', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
         } else {
 
             $this->pageNotFound();

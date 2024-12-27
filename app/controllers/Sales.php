@@ -12,10 +12,12 @@ class Sales extends Controller
         $categorias = $this->model('Categoria');
         $generos = $this->model('Genero');
         $genero = $generos->getGeneros();
+        $marcas = $this->model('Marca');
+        $marca = $marcas->getMarcas();
         $peca = $pecas->getPecasComDesconto();
         $categoria = $categorias->getCategorias();
 
-        $this->view('sales/index', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero]);
+        $this->view('sales/index', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
     }
 }
 

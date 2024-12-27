@@ -13,11 +13,13 @@ class Pecas extends Controller
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
             $peca = $pecas->getPecaById($id);
             $categoria = $categorias->getCategorias($id);
 
 
-            $this->view('pecas/detalhes', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero]);
+            $this->view('pecas/detalhes', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
 
         }else{
 

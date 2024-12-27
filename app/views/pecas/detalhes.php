@@ -88,6 +88,8 @@
     <!-- INICIO DO CONTEUDO -->
 
     <div class="container">
+    <a href="javascript: history.go(-1)">Go Back</a>
+
         <div class="row p-4">
             <div class="col">
                 <div id="carouselDetalhesRoupa" class="carousel slide carousel-fade carousel-dark" data-bs-ride="carousel">

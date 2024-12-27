@@ -13,10 +13,12 @@ class Marcas extends Controller
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
             $peca = $pecas->getPecasByMarcaId($id);
             $categoria = $categorias->getCategorias($id);
 
-            $this->view('marcas/get', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero]);
+            $this->view('marcas/get', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
         } else {
 
             $this->pageNotFound();
