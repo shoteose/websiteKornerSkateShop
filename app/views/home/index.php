@@ -29,7 +29,7 @@
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav me-auto mb-2 mb-sm-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Genêros</a>
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Generos</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown03">
               <?php foreach ($data['generos'] as $genero) {
                 echo '<li><a class="dropdown-item" href="' . $url_alias . '/categoria/get/' . $genero['id'] . '">' . $genero['descricao'] . '</a></li>';
@@ -42,6 +42,15 @@
             <ul class="dropdown-menu" aria-labelledby="dropdown03">
               <?php foreach ($data['categorias'] as $categoria) {
                 echo '<li><a class="dropdown-item" href="' . $url_alias . '/categoria/get/' . $categoria['id'] . '">' . $categoria['descricao'] . '</a></li>';
+              } ?>
+
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Marcas</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <?php foreach ($data['marcas'] as $marca) {
+                echo '<li><a class="dropdown-item" href="' . $url_alias . '/marcas/get/' . $marca['id'] . '">' . $marca['nome'] . '</a></li>';
               } ?>
 
             </ul>
@@ -77,30 +86,9 @@
 
   <!-- FIM DA NAVBAR -->
   <!-- INICIO DO CONTEUDO -->
+  <div class="row" style="height:35px; background-color:red;"><a href="<?php echo $url_alias ?>/sales"><h3> Visite a Loja 3D!! Para melhor Imersão!!</h3></a></div>
 
   <div class="container">
-
-    <?php /*foreach ($data['roupas'] as $peca) {
-
-echo '<div class="col roupa-item">';
-echo '<div class="card bg-dark shadow-sm h-100">';
-
-echo '<div style="height: 225px; display: flex; align-items: center; justify-content: center; overflow: hidden;">';
-echo '</div>';
-
-echo '<div class="card-body d-flex flex-column">';
-echo '<h5 class="card-title peca-nome mb-3">' . $peca['nome'] . '</h5>';
-
-echo '<div class="mt-auto d-flex justify-content-between align-items-center">';
-echo '<a href="' . $url_alias . '/peca/get/' . $peca['id'] . '" class="btn btn-sm mt-auto btn-outline-secondary">Ver detalhes</a>';
-echo '<a href="' . $url_alias . '/peca/update/' . $peca['id'] . '" class="btn btn-sm mt-auto btn-outline-info">Editar peca</a>';
-echo '<a class="btn btn-sm mt-auto btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar" data-id="' . $peca['id'] . '">Apagar peca</a>';
-echo '</div>';
-
-echo '</div>';
-echo '</div>';
-echo '</div>';
-} */ ?>
 
   </div>
 
@@ -110,7 +98,7 @@ echo '</div>';
   <footer class="py-5">
     <div>
       <div class="row d-flex justify-content-center align-items-center text-center">
-        <div class="col-6 col-md-2 mb-3">
+        <div class="col-4 col-md-2 mb-3">
           <h5>SOBRE NÓS</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Korner Skate Shop</a></li>
@@ -119,7 +107,7 @@ echo '</div>';
           </ul>
         </div>
 
-        <div class="col-6 col-md-2 mb-3">
+        <div class="col-4 col-md-2 mb-3">
           <h5>INFORMAÇÃO</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Termos e Condições</a></li>
@@ -127,7 +115,7 @@ echo '</div>';
           </ul>
         </div>
 
-        <div class="col-6 col-md-2 mb-3">
+        <div class="col-64 col-md-2 mb-3">
           <h5>REDES SOCIAIS</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2"><a href="https://www.facebook.com/KornerSkateShop/" class="nav-link p-0 text-muted">Facebook</a></li>

@@ -10,6 +10,8 @@ class Home extends Controller
     $pecas = $this->model('Pecas');
     $categorias = $this->model('Categoria');
     $generos = $this->model('Genero');
+    $marcas = $this->model('Marca');
+    $marca = $marcas->getMarcas();
     $genero = $generos->getGeneros();
 
     $peca = $pecas->getPecas();
@@ -24,6 +26,6 @@ class Home extends Controller
       //$this->view('home/index', ['user' => $conta]);
     }
 
-    $this->view('home/index', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero]);
+    $this->view('home/index', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
   }
 }

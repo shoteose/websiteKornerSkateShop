@@ -2,10 +2,10 @@
 
 use app\core\Controller;
 
-class Pecas extends Controller
+class Marcas extends Controller
 {
 
-    public function detalhes($id = null)
+    public function get($id = null)
     {
         if (is_numeric($id)) {
 
@@ -13,17 +13,14 @@ class Pecas extends Controller
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $genero = $generos->getGeneros();
-            $peca = $pecas->getPecaById($id);
+            $peca = $pecas->getPecasByMarcaId($id);
             $categoria = $categorias->getCategorias($id);
 
-
-            $this->view('pecas/detalhes', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero]);
-
-        }else{
+            $this->view('marcas/get', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero]);
+        } else {
 
             $this->pageNotFound();
         }
-
     }
 }
 

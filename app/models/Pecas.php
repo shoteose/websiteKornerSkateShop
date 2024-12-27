@@ -33,6 +33,11 @@ class Pecas
         return $this->db->execGet("peca/categoria/$id");
     }
 
+    public function getPecasByMarcaId($id)
+    {
+        return $this->db->execGet("peca/marca/$id");
+    }
+
     public function getPecasByGeneroId($id)
     {
         return $this->db->execGet("peca/categoria/$id");
