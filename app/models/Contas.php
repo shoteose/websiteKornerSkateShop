@@ -57,6 +57,13 @@ class Contas
         return $this->db->execPost('user/', $data);
     }
 
+    public function verificaEmail(string $email) {
+        $response = $this->db->execGet("user/emailcheck/$email");
+    
+        return $response; 
+    }
+
+
     /**
      * Deletar uma conta por ID
      *

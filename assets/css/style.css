@@ -1,101 +1,165 @@
-html, body {
-  height: 100%; /* Garante altura total da página */
+html,
+body {
+  height: 100%;
+  /* Garante altura total da página */
   margin: 0;
-  background-color: #ffffff; /* Cor de fundo da página */
-  display: flex; /* Cria um layout flex */
-  flex-direction: column; /* Organiza o conteúdo verticalmente */
+  background-color: #ffffff;
+  /* Cor de fundo da página */
+  display: flex;
+  /* Cria um layout flex */
+  flex-direction: column;
+  /* Organiza o conteúdo verticalmente */
 }
 
 body {
-  font-family: Arial, sans-serif; /* Fonte geral */
+  font-family: Arial, sans-serif;
+  /* Fonte geral */
 }
 
-.container {
-  flex: 1; /* Faz o conteúdo principal ocupar o espaço restante */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  /* Garante que ficará acima de outros elementos */
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  /* Opcional: Adiciona uma sombra */
 }
+
+
+.container {
+  flex: 1;
+  /* Faz o conteúdo principal ocupar o espaço restante */
+}
+
+/* Ativa o dropdown ao passar o mouse */
+.navbar-nav .dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+  /* Ajusta para evitar um pequeno deslocamento */
+}
+
+/* Remove o atraso para exibição */
+.dropdown-menu {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Corrige o espaçamento para um visual mais fluido */
+.navbar-nav .dropdown-menu {
+  position: absolute;
+}
+
 
 .preco-antigo {
   text-decoration: line-through;
-  color: grey; 
-  font-size: 25px; 
+  color: grey;
+  font-size: 20px;
   margin: 0;
 }
 
 .preco-novo {
-  color: red; 
-  font-size: 25px;
+  color: red;
+  font-size: 20px;
   margin: 0;
 }
 
-a{
+a {
   color: #000000;
 }
 
-.mostradorGet{
+.mostradorGet {
   size: 20px;
 }
+
 .card {
-  background-color: #ffffff; 
-  border: 1px solid #ddd; /* Borda sutil */
-  border-radius: 8px; /* Bordas arredondadas */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  /* Borda sutil */
+  border-radius: 8px;
+  /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Sombra para destacar */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px); /* Eleva levemente o card ao passar o mouse */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Intensifica a sombra */
+  transform: translateY(-5px);
+  /* Eleva levemente o card ao passar o mouse */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  /* Intensifica a sombra */
 }
 
 .card img {
-  max-width: 100%; /* Imagem responsiva */
-  height: auto; /* Mantém proporções */
-  border-radius: 8px 8px 0 0; /* Bordas arredondadas na parte superior */
+  max-width: 100%;
+  /* Imagem responsiva */
+  height: auto;
+  /* Mantém proporções */
+  border-radius: 8px 8px 0 0;
+  /* Bordas arredondadas na parte superior */
 }
 
 .card-body {
   display: flex;
-  flex-direction: column; /* Mantém o conteúdo organizado verticalmente */
-  justify-content: space-between; /* Espaçamento entre título e botão */
-  padding: 1rem; /* Espaço interno */
+  flex-direction: column;
+  /* Mantém o conteúdo organizado verticalmente */
+  justify-content: space-between;
+  /* Espaçamento entre título e botão */
+  padding: 1rem;
+  /* Espaço interno */
 }
 
 .card-title {
-  font-size: 1.25rem; /* Tamanho do título */
-  font-weight: bold; /* Título em negrito */
-  color: #333; /* Cor do texto */
+  font-size: 1.25rem;
+  /* Tamanho do título */
+  font-weight: bold;
+  /* Título em negrito */
+  color: #333;
+  /* Cor do texto */
 }
 
 .card .btn {
-  border-color: #007bff; /* Cor da borda do botão */
-  color: #007bff; /* Cor do texto do botão */
+  border-color: #007bff;
+  /* Cor da borda do botão */
+  color: #007bff;
+  /* Cor do texto do botão */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .card .btn:hover {
-  background-color: #007bff; /* Fundo azul no hover */
-  color: #fff; /* Texto branco no hover */
+  background-color: #007bff;
+  /* Fundo azul no hover */
+  color: #fff;
+  /* Texto branco no hover */
 }
 
 .row-cols-1 .col {
-  margin-bottom: 1.5rem; /* Espaço entre os cards */
+  margin-bottom: 1.5rem;
+  /* Espaço entre os cards */
 }
 
 footer {
-  text-align: center; /* Centraliza o texto no footer */
-  background-color: #ffffff; /* Cor de fundo do footer */
-  padding: 1rem 0; /* Espaço interno */
-  margin-top: auto; /* Empurra o footer para o final */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra no topo do footer */
+  text-align: center;
+  /* Centraliza o texto no footer */
+  background-color: #ffffff;
+  /* Cor de fundo do footer */
+  padding: 1rem 0;
+  /* Espaço interno */
+  margin-top: auto;
+  /* Empurra o footer para o final */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  /* Sombra no topo do footer */
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
   .container {
-    padding: 1rem; /* Reduz o padding em telas menores */
+    padding: 1rem;
+    /* Reduz o padding em telas menores */
   }
 
   .card {
-    margin-bottom: 1rem; /* Espaço entre cards para dispositivos pequenos */
+    margin-bottom: 1rem;
+    /* Espaço entre cards para dispositivos pequenos */
   }
 }
