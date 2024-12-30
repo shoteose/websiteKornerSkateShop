@@ -13,8 +13,7 @@
 
 <body>
 
-  <!-- INICIO DA NAVBAR -->
-  <nav class="navbar navbar-expand-sm navbar-light bg-light rounded sticky-header header-clone icons-design-line color-scheme-dark act-scroll" aria-label="NavBar">
+<nav class="navbar navbar-expand-sm navbar-light bg-light rounded sticky-header header-clone icons-design-line color-scheme-dark act-scroll" aria-label="NavBar">
     <div class="container-fluid">
       <a href="<?php echo $url_alias; ?>/">
         <img class="navbar-brand img-fluid" src="<?php echo $url_alias; ?>/assets/logos/loja/logoLojasF.jpg" href="<?php echo $url_alias; ?>" style="width: 55px; height: auto;">
@@ -56,20 +55,49 @@
             <a class="nav-link" href="">Loja 3D</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Blog</a>
+            <a class="nav-link" href="<?php echo $url_alias; ?>/media">Blog</a>
           </li>
-          <li class="nav-item">
-            <?php if (!isset($_SESSION['user_id_acess'])) { ?>
-              <a href="<?php echo $url_alias; ?>/contas">
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+          <?php if (!isset($_SESSION['user_id_acess'])) { ?>
+            <li class="nav-item ">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas">Login
                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/login.svg" class="img-fluid">
               </a>
-            <?php } else { ?>
-              <a href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">
+            </li>
+          <?php } else if ($_SESSION['user_id_acess'] == 1) { ?>
+
+            <li class="nav-item">
+              <a class="nav-link" class="nav-link" href="<?php echo $url_alias; ?>/admin">Dashboard
+              <img src="<?php echo $url_alias; ?>/assets/logos/icons/admin.svg" class="img-fluid">
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/perfil">Conta
                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">logout
                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
               </a>
-            <?php } ?>
-          </li>
+            </li>
+
+          <?php } else { ?>
+
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/perfil">Conta
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">Logout
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
+              </a>
+            </li>
+          <?php } ?>
         </ul>
       </div>
     </div>

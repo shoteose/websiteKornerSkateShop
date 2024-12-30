@@ -16,68 +16,96 @@
 
 <body>
 
-<!-- INICIO DA NAVBAR -->
 <nav class="navbar navbar-expand-sm navbar-light bg-light rounded sticky-header header-clone icons-design-line color-scheme-dark act-scroll" aria-label="NavBar">
-  <div class="container-fluid">
-    <a href="<?php echo $url_alias; ?>/">
-      <img class="navbar-brand img-fluid" src="<?php echo $url_alias; ?>/assets/logos/loja/logoLojasF.jpg" href="<?php echo $url_alias; ?>" style="width: 55px; height: auto;">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container-fluid">
+      <a href="<?php echo $url_alias; ?>/">
+        <img class="navbar-brand img-fluid" src="<?php echo $url_alias; ?>/assets/logos/loja/logoLojasF.jpg" href="<?php echo $url_alias; ?>" style="width: 55px; height: auto;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExample03">
-      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="" id="dropdown03" aria-expanded="false">Géneros</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown03">
-            <?php foreach ($data['generos'] as $genero) {
-              echo '<li><a class="dropdown-item" href="' . $url_alias . '/categoria/get/' . $genero['id'] . '">' . $genero['descricao'] . '</a></li>';
-            } ?>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="" id="dropdown04" aria-expanded="false">Categorias</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown04">
-            <?php foreach ($data['categorias'] as $categoria) {
-              echo '<li><a class="dropdown-item" href="' . $url_alias . '/categoria/get/' . $categoria['id'] . '">' . $categoria['descricao'] . '</a></li>';
-            } ?>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="" id="dropdown05" aria-expanded="false">Marcas</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown05">
-            <?php foreach ($data['marcas'] as $marca) {
-              echo '<li><a class="dropdown-item" href="' . $url_alias . '/marcas/get/' . $marca['id'] . '">' . $marca['nome'] . '</a></li>';
-            } ?>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo $url_alias; ?>/sales/">Sales %</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Loja 3D</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Blog</a>
-        </li>
-        <li class="nav-item">
+      <div class="collapse navbar-collapse" id="navbarsExample03">
+        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="dropdown03" aria-expanded="false">Géneros</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <?php foreach ($data['generos'] as $genero) {
+                echo '<li><a class="dropdown-item" href="' . $url_alias . '/categoria/get/' . $genero['id'] . '">' . $genero['descricao'] . '</a></li>';
+              } ?>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="dropdown04" aria-expanded="false">Categorias</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown04">
+              <?php foreach ($data['categorias'] as $categoria) {
+                echo '<li><a class="dropdown-item" href="' . $url_alias . '/categoria/get/' . $categoria['id'] . '">' . $categoria['descricao'] . '</a></li>';
+              } ?>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="dropdown05" aria-expanded="false">Marcas</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown05">
+              <?php foreach ($data['marcas'] as $marca) {
+                echo '<li><a class="dropdown-item" href="' . $url_alias . '/marcas/get/' . $marca['id'] . '">' . $marca['nome'] . '</a></li>';
+              } ?>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $url_alias; ?>/sales/">Sales %</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Loja 3D</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $url_alias; ?>/media">Blog</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
           <?php if (!isset($_SESSION['user_id_acess'])) { ?>
-            <a href="<?php echo $url_alias; ?>/contas">
-              <img src="<?php echo $url_alias; ?>/assets/logos/icons/login.svg" class="img-fluid">
-            </a>
+            <li class="nav-item ">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas">Login
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/login.svg" class="img-fluid">
+              </a>
+            </li>
+          <?php } else if ($_SESSION['user_id_acess'] == 1) { ?>
+
+            <li class="nav-item">
+              <a class="nav-link" class="nav-link" href="<?php echo $url_alias; ?>/admin">Dashboard
+              <img src="<?php echo $url_alias; ?>/assets/logos/icons/admin.svg" class="img-fluid">
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/perfil">Conta
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">logout
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
+              </a>
+            </li>
+
           <?php } else { ?>
-            <a href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">
-              <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
-              <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
-            </a>
+
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/perfil">Conta
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">Logout
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
+              </a>
+            </li>
           <?php } ?>
-        </li>
-      </ul>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-<!-- FIM DA NAVBAR -->
+  </nav>
+  <!-- FIM DA NAVBAR -->
 
   <!-- INICIO DO CONTEUDO -->
 

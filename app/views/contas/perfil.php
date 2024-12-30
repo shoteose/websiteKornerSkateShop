@@ -12,7 +12,6 @@
 
 <body>
 
-  <!-- INICIO DA NAVBAR -->
   <nav class="navbar navbar-expand-sm navbar-light bg-light rounded sticky-header header-clone icons-design-line color-scheme-dark act-scroll" aria-label="NavBar">
     <div class="container-fluid">
       <a href="<?php echo $url_alias; ?>/">
@@ -55,27 +54,49 @@
             <a class="nav-link" href="">Loja 3D</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Blog</a>
+            <a class="nav-link" href="<?php echo $url_alias; ?>/media">Blog</a>
           </li>
+        </ul>
 
+        <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
           <?php if (!isset($_SESSION['user_id_acess'])) { ?>
-            <li class="nav-item">
-              <a href="<?php echo $url_alias; ?>/contas">
+            <li class="nav-item ">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas">Login
                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/login.svg" class="img-fluid">
               </a>
             </li>
-          <?php } else { ?>
+          <?php } else if ($_SESSION['user_id_acess'] == 1) { ?>
+
             <li class="nav-item">
-              <a href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">
+              <a class="nav-link" class="nav-link" href="<?php echo $url_alias; ?>/admin">Dashboard
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/admin.svg" class="img-fluid">
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/perfil">Conta
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">logout
                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
               </a>
             </li>
+
+          <?php } else { ?>
+
             <li class="nav-item">
-              <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/perfil">Conta
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">Logout
+                <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
               </a>
             </li>
           <?php } ?>
-
         </ul>
       </div>
     </div>
@@ -84,31 +105,34 @@
 
 
   <!-- INICIO DO CONTEUDO -->
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">Editar Perfil</h2>
-    <form action="<?php echo $url_alias; ?>/perfil/update" method="POST" enctype="multipart/form-data">
+  <div class="container mt-5 mb-2">
+    <h2 class="text-center mb-3">Editar Perfil</h2>
+    <form action="<?php echo $url_alias; ?>/contas/perfil" method="POST" enctype="multipart/form-data">
+
+      <!-- Mensagem de erro -->
+      <?php if (!empty($data['error'])) { ?>
+        <div class="alert alert-danger text-center" role="alert">
+          <?php echo $data['error']; ?>
+        </div>
+      <?php }; ?>
+
       <!-- Nome -->
-      <div class="form-outline mb-4">
+      <div class="form-outline mb-3">
         <label for="nome" class="form-label">Nome</label>
-        <input type="text" id="nome" name="nome" class="form-control form-control-lg" placeholder="<?php echo $data['conta'][0]['nome']; ?>" value="<?php echo $data['conta'][0]['nome']; ?>" required>
+        <input type="text" id="nome" name="nome" class="form-control form-control-lg" placeholder="<?php echo $data['conta']['nome']; ?>" value="<?php echo $data['conta']['nome']; ?>" required>
       </div>
 
       <!-- Apelido -->
-      <div class="form-outline mb-4">
+      <div class="form-outline mb-3">
         <label for="apelido" class="form-label">Apelido</label>
-        <input type="text" id="apelido" name="apelido" class="form-control form-control-lg" placeholder="<?php echo $data['conta'][0]['apelido']; ?>" value="<?php echo $data['conta'][0]['apelido']; ?>" required>
+        <input type="text" id="apelido" name="apelido" class="form-control form-control-lg" placeholder="<?php echo $data['conta']['apelido']; ?>" value="<?php echo $data['conta']['apelido']; ?>" required>
       </div>
 
-      <!-- Email -->
-      <div class="form-outline mb-4">
-        <label for="email" class="form-label">E-mail</label>
-        <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="<?php echo $data['conta'][0]['email']; ?>" value="<?php echo $data['conta'][0]['email']; ?>" required>
-      </div>
 
       <!-- Nova Pass -->
-      <div class="form-outline mb-4">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" name="<?php echo $data['conta'][0]['pass']; ?>" class="form-control form-control-lg" placeholder="<?php echo $data['conta'][0]['pass']; ?>">
+      <div class="form-outline mb-3">
+        <label for="password" class="form-label">Nova Password</label>
+        <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Nova Password">
       </div>
 
       <!-- Botão de Salvar -->

@@ -35,6 +35,8 @@ class Contas extends Controller
         $_SESSION['user_id_acess'] = $conta['id_tipoUser'];
         $_SESSION['user_ID'] = $conta['id'];
 
+        echo 'Login feito' . $_SESSION['user_id_acess'];
+
         header("Location: /websiteKornerSkateShop/");
         exit();
       } else {
@@ -65,8 +67,41 @@ class Contas extends Controller
     $genero = $generos->getGeneros();
     $conta = $contas->getContaById($_SESSION['user_ID']);
 
-    // $conta = $constas->get();
-    return $this->view('contas/perfil', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'conta' => $conta] );
+    $erro = '';
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $user = [
+        'email' => $conta[0]['email'],
+        'nome' => $_POST['nome'],
+        'apelido' => $_POST['apelido'],
+        'pass' => password_hash($_POST['password'], PASSWORD_BCRYPT) ?: $conta[0]['pass']
+      ];
+
+      if ($user['email'] == '' || $user['nome'] == '' || $user['apelido'] == '') {
+        $erro = 'O campo não pode estar vazio';
+      }
+
+      if ($user['pass'] == '' || strlen($user['pass']) < 8) {
+        $erro = 'A passe precisa de 8 caracteres';
+      }
+
+      if ($erro == '') {
+        $contaNova = $contas->updateConta($user, $conta[0]['id']);
+      }
+
+      if ($contaNova) {
+        //print_r( $contaNova);
+        //print_r($user);
+        $this->view('contas/perfil', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'conta' => $contaNova]);
+      } else {
+
+        //var_dump($conta);
+        $this->view('contas/perfil', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'conta' => $conta, 'error' => $erro]);
+      }
+    } else {
+      // $conta = $constas->get();
+      $this->view('contas/perfil', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'conta' => $conta[0]]);
+    }
   }
 
   public function logout()
@@ -90,7 +125,7 @@ class Contas extends Controller
     $erro = '';
 
     define('ENCRYPTION_COST', '2y');
-
+    $conta = null;
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $user = [
         'email' => $_POST['email'],

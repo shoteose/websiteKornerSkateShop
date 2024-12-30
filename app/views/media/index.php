@@ -16,8 +16,7 @@
 
 <body>
 
-  <!-- INICIO DA NAVBAR -->
-  <nav class="navbar navbar-expand-sm navbar-light bg-light rounded sticky-header header-clone icons-design-line color-scheme-dark act-scroll" aria-label="NavBar">
+<nav class="navbar navbar-expand-sm navbar-light bg-light rounded sticky-header header-clone icons-design-line color-scheme-dark act-scroll" aria-label="NavBar">
     <div class="container-fluid">
       <a href="<?php echo $url_alias; ?>/">
         <img class="navbar-brand img-fluid" src="<?php echo $url_alias; ?>/assets/logos/loja/logoLojasF.jpg" href="<?php echo $url_alias; ?>" style="width: 55px; height: auto;">
@@ -109,16 +108,36 @@
   <!-- FIM DA NAVBAR -->
 
   <!-- INICIO DO CONTEUDO -->
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center" style="font-size: 50px;">Blog</h1>
+      </div>
+    </div>
 
-  <div class="row text-center justify-content-center" style="height:35px; background-color:red;"><a href="<?php echo $url_alias ?>/sales">
-      <h3> Visite a Loja 3D!! Para melhor Imersão!!</h3>
-    </a></div>
-
-  <div class="container">
-
+    <div class="row mt-4 d-flex justify-content-center">
+      <?php foreach ($data['medias'] as $media) {
+        if (isset($media['url'])) {
+      ?>
+          <div class="col-12 mb-4 text-center border-bottom">
+            <h3 class="fw-bold pb-3"><?php echo $media['titulo']; ?></h3>
+            <p class="pb-2"><?php echo $media['descricao']; ?></p>
+            <div class="d-flex justify-content-center"><?php echo $media['url']; ?></div>
+          </div>
+        <?php
+        } else {
+        ?>
+          <div class="col-12 mb-4 border-bottom">
+            <h3 class="fw-bold pb-3"><?php echo $media['titulo']; ?></h3>
+            <p><?php echo $media['descricao']; ?></p>
+          </div>
+      <?php
+        }
+      } ?>
+    </div>
   </div>
-
   <!-- FIM DO CONTEUDO -->
+
   <!-- FOOTER -->
 
   <footer class="py-3">

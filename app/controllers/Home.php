@@ -17,14 +17,6 @@ class Home extends Controller
     $peca = $pecas->getPecas();
     $categoria = $categorias->getCategorias();
 
-    // existe user?
-    if (isset($_SESSION['user_id_acess'])) {
-
-      $userId = $_SESSION['user_id_acess'];
-      $conta = $contass->getContaById($userId);
-
-      //$this->view('home/index', ['user' => $conta]);
-    }
 
     $this->view('home/index', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
   }

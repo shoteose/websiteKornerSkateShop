@@ -23,17 +23,18 @@ class Contas
         return $this->db->execGet('user/');
     }
 
-    public function login($conta) {
+    public function login($conta)
+    {
         $response = $this->db->execPost('user/login/', $conta);
-    
+
         if (isset($response['error']) && $response['error'] === true) {
             // Retorna o erro para o controlador
             return $response;
         }
-    
+
         return $response; // Retorna os dados do usuário em caso de sucesso
     }
-    
+
 
     /**
      * Obter uma conta por ID
@@ -57,12 +58,18 @@ class Contas
         return $this->db->execPost('user/', $data);
     }
 
-    public function verificaEmail(string $email) {
+    public function verificaEmail(string $email)
+    {
         $response = $this->db->execGet("user/emailcheck/$email");
-    
-        return $response; 
+
+        return $response;
     }
 
+    public function updateConta(array $data, int $id)
+    {
+        $response = $this->db->execPut("user/$id", $data);
+        return $response;
+    }
 
     /**
      * Deletar uma conta por ID
