@@ -26,7 +26,7 @@ class Admin extends Controller
         }
     }
 
-    public function peca()
+    public function peca($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -39,6 +39,14 @@ class Admin extends Controller
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
+
+            
+            if($ids != null) {
+                $result = $pecas->deletePeca($ids);
+                header("Location: /websiteKornerSkateShop/admin/peca");
+                exit();
+            }
+
 
             $this->view('admin/peca', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
         } else {
@@ -47,7 +55,7 @@ class Admin extends Controller
         }
     }
 
-    public function categoria()
+    public function categoria($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -60,6 +68,12 @@ class Admin extends Controller
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
+
+            if($ids != null) {
+                $result = $categorias->deleteCategoria($ids);
+                header("Location: /websiteKornerSkateShop/admin/categoria");
+                exit();
+            }
 
             $this->view('admin/categoria', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
         } else {
@@ -68,7 +82,7 @@ class Admin extends Controller
         }
     }
 
-    public function marca()
+    public function marca($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -81,6 +95,12 @@ class Admin extends Controller
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
+
+            if($ids != null) {
+                $result = $marcas->deleteMarca($ids);
+                header("Location: /websiteKornerSkateShop/admin/marca");
+                exit();
+            }
 
             $this->view('admin/marca', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
         } else {
@@ -89,7 +109,7 @@ class Admin extends Controller
         }
     }
 
-    public function genero()
+    public function genero($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -102,6 +122,12 @@ class Admin extends Controller
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
+
+            if($ids != null) {
+                $result = $generos->deleteGenero($ids);
+                header("Location: /websiteKornerSkateShop/admin/genero");
+                exit();
+            }
 
             $this->view('admin/genero', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
         } else {
@@ -110,7 +136,7 @@ class Admin extends Controller
         }
     }
 
-    public function cores()
+    public function cor($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -118,20 +144,28 @@ class Admin extends Controller
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $marcas = $this->model('Marca');
+            $cores = $this->model('Cor');
 
+            $cor = $cores->getCores();
             $peca = $pecas->getPecas();
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            $this->view('admin/cores', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            if($ids != null) {
+                $result = $cor->deleteCor($ids);
+                header("Location: /websiteKornerSkateShop/admin/cor");
+                exit();
+            }
+
+            $this->view('admin/cor', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'cores' => $cor]);
         } else {
 
             $this->pageNotFound();
         }
     }
 
-    public function tamanho()
+    public function tamanho($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -139,20 +173,28 @@ class Admin extends Controller
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $marcas = $this->model('Marca');
+            $tamanhos = $this->model('Tamanho');
+            $tamanho = $tamanhos->getTamanhos();
 
             $peca = $pecas->getPecas();
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            $this->view('admin/tamanho', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            if($ids != null) {
+                $result = $tamanhos->deleteCategoria($ids);
+                header("Location: /websiteKornerSkateShop/admin/tamanho");
+                exit();
+            }
+
+            $this->view('admin/tamanho', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'tamanhos' => $tamanho]);
         } else {
 
             $this->pageNotFound();
         }
     }
 
-    public function stock()
+    public function stock($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -160,20 +202,30 @@ class Admin extends Controller
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $marcas = $this->model('Marca');
+            $stocks = $this->model('Stock');
 
+            $stock = $stocks->getStock();
             $peca = $pecas->getPecas();
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            $this->view('admin/stock', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            
+
+            if($ids != null) {
+                $result = $stocks->deleteStock($ids);
+                header("Location: /websiteKornerSkateShop/admin/stock");
+                exit();
+            }
+
+            $this->view('admin/stock', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'stocks' => $stock]);
         } else {
 
             $this->pageNotFound();
         }
     }
 
-    public function media()
+    public function media($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -181,20 +233,28 @@ class Admin extends Controller
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $marcas = $this->model('Marca');
+            $medias = $this->model('Media');
 
             $peca = $pecas->getPecas();
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
+            $media = $medias->getMedias();
 
-            $this->view('admin/media', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            if($ids != null) {
+                $result = $medias->deleteMedia($ids);
+                header("Location: /websiteKornerSkateShop/admin/media");
+                exit();
+            }
+
+            $this->view('admin/media', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'medias' => $media]);
         } else {
 
             $this->pageNotFound();
         }
     }
 
-    public function conta()
+    public function conta($ids = null)
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
@@ -208,6 +268,12 @@ class Admin extends Controller
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
+
+            if($ids != null) {
+                $result = $contas->deleteConta($ids);
+                header("Location: /websiteKornerSkateShop/admin/conta");
+                exit();
+            }
 
             $this->view('admin/conta', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'contas' => $conta]);
         } else {

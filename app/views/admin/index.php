@@ -118,7 +118,7 @@
         <a href="<?php echo $url_alias ;?>/admin/peca" class="text-decoration-none text-reset">
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Pecas</h5>
+                    <h5 class="card-title">Peças</h5>
                 </div>
             </div>
         </a>

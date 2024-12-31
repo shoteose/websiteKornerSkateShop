@@ -47,4 +47,9 @@ class Pecas
     {
         return $this->db->execGet('peca/sales');
     }
+
+    public function deletePeca($id)
+    {
+        return $this->db->execDelete("peca/$id");
+    }
 }
