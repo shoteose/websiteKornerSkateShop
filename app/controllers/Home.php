@@ -17,7 +17,8 @@ class Home extends Controller
     $peca = $pecas->getPecas();
     $categoria = $categorias->getCategorias();
 
-
-    $this->view('home/index', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
+    $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+    $this->view('home/index', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+    $this->view('shared/footer');
   }
 }

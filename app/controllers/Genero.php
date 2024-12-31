@@ -17,14 +17,58 @@ class Genero extends Controller
             $marca = $marcas->getMarcas();
             $peca = $pecas->getPecasByGeneroId($id);
             $categoria = $categorias->getCategorias($id);
-    
-            $this->view('categoria/get', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
+            $generoo = $generos->getGeneroById($id);
 
-        }else{
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('generos/get', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'generoos' => $generoo]);
+            $this->view('shared/footer');
+        } else {
 
             $this->pageNotFound();
         }
+    }
 
+    public function add()
+    {
+        if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
+
+            $categorias = $this->model('Categoria');
+            $generos = $this->model('Genero');
+            $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
+            $categoria = $categorias->getCategorias();
+            $erro = '';
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                $newGen = [
+                    'descricao' => $_POST['descricao'],
+                ];
+
+                foreach ($genero as $gen) {
+                    if ($gen['descricao'] == $newGen['descricao']) {
+                        $erro = 'Genero já existente';
+                    }
+                }
+
+                if ($erro == '') {
+                    $generos->addGenero($newGen);
+                    header("Location: /websiteKornerSkateShop/admin/genero");
+                    exit();
+                } else {
+                    $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                    $this->view('admin/add/genero', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'error' => $erro]);
+                    $this->view('shared/footer');
+                }
+            } else {
+                $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('admin/add/genero', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('shared/footer');
+            }
+        } else {
+
+            $this->pageNotFound();
+        }
     }
 }
 

@@ -17,7 +17,9 @@ class Sales extends Controller
         $peca = $pecas->getPecasComDesconto();
         $categoria = $categorias->getCategorias();
 
-        $this->view('sales/index', ['roupas' => $peca , 'categorias' => $categoria,'generos' => $genero, 'marcas' => $marca]);
+        $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+        $this->view('sales/index', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+        $this->view('shared/footer');
     }
 }
 

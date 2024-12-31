@@ -2,33 +2,12 @@
 
 use app\core\Controller;
 
-class Categoria extends Controller
+class Cor extends Controller
 {
-
-    public function get($id = null)
-    {
-        if (is_numeric($id)) {
-
-            $pecas = $this->model('Pecas');
-            $categorias = $this->model('Categoria');
-            $generos = $this->model('Genero');
-            $genero = $generos->getGeneros();
-            $marcas = $this->model('Marca');
-            $marca = $marcas->getMarcas();
-            $peca = $pecas->getPecasByCategoriaId($id);
-            $categoria = $categorias->getCategorias();
-            $categoriaa = $categorias->getCategoriaById($id);
-            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
-            $this->view('categoria/get', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'categoriaa' => $categoriaa]);
-            $this->view('shared/footer');
-        } else {
-
-            $this->pageNotFound();
-        }
-    }
 
     public function add()
     {
+
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
 
             $categorias = $this->model('Categoria');
@@ -37,22 +16,24 @@ class Categoria extends Controller
             $marcas = $this->model('Marca');
             $marca = $marcas->getMarcas();
             $categoria = $categorias->getCategorias();
+            $cores = $this->model('Cor');
+            $cor = $cores->getCores();
             $erro = '';
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-                $newCat = [
+                $newCor = [
                     'descricao' => $_POST['descricao'],
                 ];
 
-                foreach ($categoria as $cat) {
-                    if ($cat['descricao'] == $newCat['descricao']) {
-                        $erro = 'Categoria já existente';
+                foreach ($cor as $c) {
+                    if ($c['descricao'] == $newCor['descricao']) {
+                        $erro = 'Cor já existente';
                     }
                 }
 
                 if ($erro == '') {
-                    $categorias->addCategoria($newCat);
-                    header("Location: /websiteKornerSkateShop/admin/categoria");
+                    $cores->addCor($newCor);
+                    header("Location: /websiteKornerSkateShop/admin/cor");
                     exit();
                 } else {
                     $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
@@ -61,7 +42,7 @@ class Categoria extends Controller
                 }
             } else {
                 $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
-                $this->view('admin/add/categoria', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('admin/add/cor', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
                 $this->view('shared/footer');
             }
         } else {

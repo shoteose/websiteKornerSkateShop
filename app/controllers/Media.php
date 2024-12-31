@@ -40,7 +40,7 @@ class Media extends Controller
                 }
                 // verifica se é um link do Instagram
                 elseif (str_contains($url, 'instagram.com')) {
-                    
+
                     $m['url'] = "<blockquote class='instagram-media' data-instgrm-permalink='$url' 
                                        data-instgrm-version='14'></blockquote>
                                        <script async src='//www.instagram.com/embed.js'></script>";
@@ -48,7 +48,51 @@ class Media extends Controller
             }
         }
 
-
+        $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
         $this->view('media/index', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'medias' => $media]);
+        $this->view('shared/footer');
+    }
+
+    public function add()
+    {
+        if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
+
+            $categorias = $this->model('Categoria');
+            $generos = $this->model('Genero');
+            $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
+            $categoria = $categorias->getCategorias();
+            $medias = $this->model('Media');
+            $media = $medias->getMedias();
+            $erro = '';
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                $newMed = [
+                    'titulo' => $_POST['titulo'],
+                    'descricao' => $_POST['descricao'],
+                    'url' => $_POST['url']
+
+                ];
+
+                if ($erro == '') {
+                    $medias->addMedia($newMed);
+                    header("Location: /websiteKornerSkateShop/admin/media");
+                    exit();
+                } else {
+                    $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                    $this->view('admin/add/media', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'error' => $erro]);
+                    $this->view('shared/footer');
+                }
+            } else {
+                $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('admin/add/media', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('shared/footer');
+            }
+        } else {
+
+            $this->pageNotFound();
+        }
     }
 }

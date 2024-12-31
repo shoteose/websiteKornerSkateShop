@@ -18,8 +18,9 @@ class Admin extends Controller
             $categoria = $categorias->getCategorias();
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
-
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
             $this->view('admin/index', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -40,15 +41,16 @@ class Admin extends Controller
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            
-            if($ids != null) {
+
+            if ($ids != null) {
                 $result = $pecas->deletePeca($ids);
                 header("Location: /websiteKornerSkateShop/admin/peca");
                 exit();
             }
 
-
-            $this->view('admin/peca', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/peca', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -69,13 +71,14 @@ class Admin extends Controller
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            if($ids != null) {
+            if ($ids != null) {
                 $result = $categorias->deleteCategoria($ids);
                 header("Location: /websiteKornerSkateShop/admin/categoria");
                 exit();
             }
-
-            $this->view('admin/categoria', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/categoria', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -96,13 +99,14 @@ class Admin extends Controller
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            if($ids != null) {
+            if ($ids != null) {
                 $result = $marcas->deleteMarca($ids);
                 header("Location: /websiteKornerSkateShop/admin/marca");
                 exit();
             }
-
-            $this->view('admin/marca', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/marca', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -123,13 +127,14 @@ class Admin extends Controller
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            if($ids != null) {
+            if ($ids != null) {
                 $result = $generos->deleteGenero($ids);
                 header("Location: /websiteKornerSkateShop/admin/genero");
                 exit();
             }
-
-            $this->view('admin/genero', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/genero', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -152,13 +157,14 @@ class Admin extends Controller
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            if($ids != null) {
-                $result = $cor->deleteCor($ids);
+            if ($ids != null) {
+                $result = $cores->deleteCor($ids);
                 header("Location: /websiteKornerSkateShop/admin/cor");
                 exit();
             }
-
-            $this->view('admin/cor', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'cores' => $cor]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/cor', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'cores' => $cor]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -181,13 +187,15 @@ class Admin extends Controller
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            if($ids != null) {
-                $result = $tamanhos->deleteCategoria($ids);
+            if ($ids != null) {
+                $result = $tamanhos->deleteTamanho($ids);
                 header("Location: /websiteKornerSkateShop/admin/tamanho");
                 exit();
             }
 
-            $this->view('admin/tamanho', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'tamanhos' => $tamanho]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/tamanho', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'tamanhos' => $tamanho]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -210,15 +218,16 @@ class Admin extends Controller
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            
 
-            if($ids != null) {
+
+            if ($ids != null) {
                 $result = $stocks->deleteStock($ids);
                 header("Location: /websiteKornerSkateShop/admin/stock");
                 exit();
             }
-
-            $this->view('admin/stock', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'stocks' => $stock]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/stock', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'stocks' => $stock]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -241,13 +250,14 @@ class Admin extends Controller
             $marca = $marcas->getMarcas();
             $media = $medias->getMedias();
 
-            if($ids != null) {
+            if ($ids != null) {
                 $result = $medias->deleteMedia($ids);
                 header("Location: /websiteKornerSkateShop/admin/media");
                 exit();
             }
-
-            $this->view('admin/media', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'medias' => $media]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/media', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'medias' => $media]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
@@ -269,18 +279,21 @@ class Admin extends Controller
             $genero = $generos->getGeneros();
             $marca = $marcas->getMarcas();
 
-            if($ids != null) {
+            if ($ids != null) {
                 $result = $contas->deleteConta($ids);
                 header("Location: /websiteKornerSkateShop/admin/conta");
                 exit();
             }
-
-            $this->view('admin/conta', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'contas' => $conta]);
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('admin/indexes/conta', ['roupas' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'contas' => $conta]);
+            $this->view('shared/footer');
         } else {
 
             $this->pageNotFound();
         }
     }
+
+
 }
 
 // :: Scope Resolution Operator

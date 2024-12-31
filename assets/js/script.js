@@ -42,7 +42,9 @@ function deleteItem() {
 
     // Redireciona para a URL de eliminar após 1 segundos
     setTimeout(function () {
+
       window.location.href = '/websiteKornerSkateShop/admin/' + alvo + '/' + itemID;
+
     }, 1000);
   }
 }

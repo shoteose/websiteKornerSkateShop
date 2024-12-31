@@ -42,16 +42,15 @@ class Contas extends Controller
       } else {
 
         $error = 'Email ou password errados';
-        $this->view('contas/index', [
-          'categorias' => $categoria,
-          'generos' => $genero,
-          'marcas' => $marca,
-          'error' => $error
-        ]);
+        $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+        $this->view('contas/index', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'error' => $error]);
+        $this->view('shared/footer');
       }
     } else {
       // view nromal
+      $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
       $this->view('contas/index', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+      $this->view('shared/footer');
     }
   }
 
@@ -92,15 +91,21 @@ class Contas extends Controller
       if ($contaNova) {
         //print_r( $contaNova);
         //print_r($user);
+        $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
         $this->view('contas/perfil', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'conta' => $contaNova]);
+        $this->view('shared/footer');
       } else {
 
         //var_dump($conta);
+        $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
         $this->view('contas/perfil', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'conta' => $conta, 'error' => $erro]);
+        $this->view('shared/footer');
       }
     } else {
       // $conta = $constas->get();
+      $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
       $this->view('contas/perfil', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'conta' => $conta[0]]);
+      $this->view('shared/footer');
     }
   }
 
@@ -160,10 +165,14 @@ class Contas extends Controller
       } else {
 
         //var_dump($conta);
+        $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
         $this->view('contas/registo', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'error' => $erro]);
+        $this->view('shared/footer');
       }
     } else {
+      $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
       $this->view('contas/registo', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+      $this->view('shared/footer');
     }
   }
 }
