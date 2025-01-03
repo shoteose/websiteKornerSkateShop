@@ -34,7 +34,7 @@
         echo '<tr>';
         echo '<th class="align-middle">' . $marca['id'] . '</th>';
         echo '<td class="align-middle">' . $marca['nome'] . '</td>';
-        echo '<td class="align-middle"><button type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . 'marca/' . $marca['id'] . '">Editar Marca</button></td>';
+        echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/marcas/editar/' . $marca['id'] . '" >Editar Marca</a></td>';
         echo '<td class="align-middle"><a class="btn btn-danger btn-outline-light"  data-bs-toggle="modal" data-bs-target="#modalEliminar" data-id="marca:' . $marca['id'] . '">Eliminar</a></td>';
         echo '</tr>';
       }

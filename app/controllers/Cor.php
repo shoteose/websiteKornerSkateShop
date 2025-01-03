@@ -50,6 +50,46 @@ class Cor extends Controller
             $this->pageNotFound();
         }
     }
+
+    public function editar($id = null)
+    {
+        if (is_numeric($id) && isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
+            $categorias = $this->model('Categoria');
+            $generos = $this->model('Genero');
+            $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
+            $categoria = $categorias->getCategorias();
+            $marcaInd = $marcas->getMarcaById($id);
+            $cores = $this->model('Cor');
+            $corInd = $cores->getCorById($id);
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+                $newCor = [
+                    'descricao' => $_POST['descricao']
+                ];
+
+                if ($cores->updateCor($newCor, $corInd[0]['id'])) {
+                    header("Location: /websiteKornerSkateShop/admin/cor");
+                    exit();
+                } else {
+                    $erro = "Erro ao atualizar a cor.";
+
+                    $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                    $this->view('cor/editar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'corInd' => $corInd, 'error' => $erro]);
+                    $this->view('shared/footer');
+                }
+            } else {
+                $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('cor/editar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'corInd' => $corInd]);
+                $this->view('shared/footer');
+            }
+        } else {
+            $this->pageNotFound();
+        }
+    }
 }
 
 // :: Scope Resolution Operator

@@ -1,21 +1,21 @@
 <!-- INICIO DO CONTEUDO -->
 <div class="container">
 
-<div class="d-flex flex-row mt-2 align-content-center">
+  <div class="d-flex flex-row mt-2 align-content-center">
 
-<div class="col-2">
-  <a href="<?php echo $url_alias ?>/admin" type="button" class="btn btn-outline-dark col-4 mt-4">Voltar</a>
-</div>
+    <div class="col-2">
+      <a href="<?php echo $url_alias ?>/admin" type="button" class="btn btn-outline-dark col-4 mt-4">Voltar</a>
+    </div>
 
-<div class="col-8">
-  <h1 class="text-center m-4">Peças de Roupa</h1>
-</div>
+    <div class="col-8">
+      <h1 class="text-center m-4">Peças de Roupa</h1>
+    </div>
 
-<div class="col-3">
-  <a href="<?php echo $url_alias ?>/pecas/add" type="button" class="btn btn-outline-dark col-4 mt-4">Adicionar</a>
-</div>
+    <div class="col-3">
+      <a href="<?php echo $url_alias ?>/pecas/add" type="button" class="btn btn-outline-dark col-4 mt-4">Adicionar</a>
+    </div>
 
-</div>
+  </div>
 
   <table class="table table-striped align-middle">
     <thead>
@@ -32,6 +32,7 @@
         <th scope="col">Desconto</th>
         <th scope="col">Tridimencional</th>
         <th scope="col">Textura MAX 64KB</th>
+        <th scope="col">Editar Fotos</th>
         <th scope="col">Editar</th>
         <th scope="col">Eliminar</th>
       </tr>
@@ -52,17 +53,23 @@
         echo '<td class="align-middle">' . $peca['preco'] . '</td>';
         echo '<td class="align-middle">' . $peca['taxa_iva'] . '</td>';
         echo '<td class="align-middle">' . $peca['taxa_desconto'] . '</td>';
-        echo '<td class="align-middle">' . $peca['tridimensional'] . '</td>';
+
+        if ($peca['tridimensional'] == 0) {
+          echo '<td class="align-middle"> Não </td>';
+        } else {
+          echo '<td class="align-middle"> Sim </td>';
+        }
 
         if (!empty($peca['imagemTextura']['data'])) {
           $binaryData = pack('C*', ...$peca['imagemTextura']['data']);
+          // Converte a string binária para Base64
           $base64Image = base64_encode($binaryData);
-          echo '<td class="align-middle"><img src="data:image/png;base64,' . $base64Image . '" alt="Textura" style="max-width:75px;"></td>';
+          echo '<td class="align-middle"><img src="data:image/png;base64,' . $base64Image  . '" alt="Textura" style="max-width:75px;"></td>';
         } else {
           echo '<td class="align-middle">Sem textura</td>';
         }
-
-        echo '<td class="align-middle"><button type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . 'peca/' . $peca['id'] . '">Editar Marca</button></td>';
+        echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/pecas/fotos/' . $peca['id'] . '" >Editar foto</a></td>';
+        echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/pecas/editar/' . $peca['id'] . '" >Editar Peça</a></td>';
         echo '<td class="align-middle"><a class="btn btn-danger btn-outline-light"  data-bs-toggle="modal" data-bs-target="#modalEliminar" data-id="peca:' . $peca['id'] . '">Eliminar</a></td>';
         echo '</tr>';
       }

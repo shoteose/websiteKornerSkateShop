@@ -27,6 +27,152 @@ class Pecas extends Controller
         }
     }
 
+    public function editar($id = null)
+    {
+        if (is_numeric($id) && isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
+            $pecas = $this->model('Pecas');
+            $categorias = $this->model('Categoria');
+            $generos = $this->model('Genero');
+            $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
+            $categoria = $categorias->getCategorias();
+            $cores = $this->model('Cor');
+            $cor = $cores->getCores();
+            $peca = $pecas->getPecaById($id);
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $texturaBin = null;
+
+                // Verifica se uma nova textura foi enviada
+                if (!empty($_FILES['imagemTextura']['tmp_name'])) {
+                    $texturaBin = base64_encode(file_get_contents($_FILES['imagemTextura']['tmp_name']));
+                } else {
+                    // Verifica e trata o campo imagemTextura
+                    if (isset($peca[0]['imagemTextura']) && is_string($peca[0]['imagemTextura'])) {
+                        $texturaBin = base64_encode($peca[0]['imagemTextura']); // Já é uma string binária
+                    } elseif (isset($peca[0]['imagemTextura']['data'])) {
+                        // Converte array de dados para binário
+                        $binaryData = pack('C*', ...$peca[0]['imagemTextura']['data']);
+                        $texturaBin = base64_encode($binaryData);
+                    } else {
+                        $texturaBin = null; // Sem textura
+                    }
+                }
+
+                $newPeca = [
+                    'nome' => $_POST['nome'],
+                    'descricao' => $_POST['descricao'],
+                    'id_cor' => $_POST['id_cor'],
+                    'id_categoria' => $_POST['id_categoria'],
+                    'id_marca' => $_POST['id_marca'],
+                    'id_genero' => $_POST['id_genero'],
+                    'preco' => $_POST['preco'],
+                    'taxa_iva' => $_POST['taxa_iva'],
+                    'taxa_desconto' => $_POST['taxa_desconto'],
+                    'tridimensional' => $_POST['tridimensional'],
+                    'imagemTextura' => $texturaBin
+                ];
+
+                if ($pecas->updatePeca($newPeca, $peca[0]['id'])) {
+                    header("Location: /websiteKornerSkateShop/admin/peca");
+                    exit();
+                } else {
+
+                    $erro = "Erro ao dar update";
+                    $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                    $this->view('pecas/editar', ['peca' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'cores' => $cor, 'error' => $erro]);
+                    $this->view('shared/footer');
+                }
+            } else {
+                $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('pecas/editar', ['peca' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'cores' => $cor]);
+                $this->view('shared/footer');
+            }
+        } else {
+            $this->pageNotFound();
+        }
+    }
+
+    public function fotos($id = null)
+    {
+
+        if (is_numeric($id) && isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
+
+            $pecas = $this->model('Pecas');
+            $categorias = $this->model('Categoria');
+            $generos = $this->model('Genero');
+            $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $fotosModel = $this->model('Fotos');
+            $pecas_fotos = $this->model('Pecas_fotos');
+            $marca = $marcas->getMarcas();
+            $categoria = $categorias->getCategorias();
+            $cores = $this->model('Cor');
+            $cor = $cores->getCores();
+            $peca = $pecas->getPecaById($id);
+            $pecaas_fotos = $pecas_fotos->getPecas_fotos($id);
+
+            $quantidadeFotos = count($pecaas_fotos) + 1;
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fotos'])) {
+
+                $fotos = [];
+
+                if (isset($_FILES['fotos'])) {
+
+                    for ($a = 0; $a < count($_FILES['fotos']['name']); $a++) {
+                        $fotos[$a] = [
+                            'name' => $_FILES['fotos']['name'][$a],
+                            'tmp_name' => $_FILES['fotos']['tmp_name'][$a],
+                            'error' => $_FILES['fotos']['error'][$a],
+                            'size' => $_FILES['fotos']['size'][$a],
+                        ];
+                    }
+                }
+
+                $id_peca = $id;
+
+                for ($i = 0; $i <  count($fotos); $i++) {
+
+                    if ($fotos[$i]['error'] === UPLOAD_ERR_OK) {
+
+                        $nomeFormatado = $peca[0]['nome'] . '_' . $quantidadeFotos + $i;
+                        $extensao = pathinfo($fotos[$i]['name'], PATHINFO_EXTENSION);
+
+                        $caminhoFinal = 'assets/logos/roupas/' . $nomeFormatado . '.' . $extensao;
+
+                        if (move_uploaded_file($fotos[$i]['tmp_name'], $caminhoFinal)) {
+                            $newFoto = [
+                                'nome_arquivo' => $nomeFormatado . '.' . $extensao
+                            ];
+
+                            $fotoNow = $fotosModel->addFoto($newFoto);
+                            $id_foto = $fotoNow['id'];
+
+                            $newPeca_Foto = [
+                                'id_peca' => $id_peca,
+                                'id_foto' => $id_foto
+                            ];
+
+                            $pecas_fotos->addPecas_fotos($newPeca_Foto);
+                        }
+                    }
+                }
+
+                header("Location: /websiteKornerSkateShop/pecas/fotos/$id");
+                exit();
+            }
+
+            $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+            $this->view('pecas/fotos', ['peca' => $peca, 'categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'cores' => $cor, 'pecas_fotos' => $pecaas_fotos]);
+            $this->view('shared/footer');
+        } else {
+
+            $this->pageNotFound();
+        }
+    }
+
     public function add()
     {
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
@@ -35,6 +181,8 @@ class Pecas extends Controller
             $generos = $this->model('Genero');
             $genero = $generos->getGeneros();
             $marcas = $this->model('Marca');
+            $fotosModel = $this->model('Fotos');
+            $pecas_fotos = $this->model('Pecas_fotos');
             $marca = $marcas->getMarcas();
             $categoria = $categorias->getCategorias();
             $cores = $this->model('Cor');
@@ -47,17 +195,23 @@ class Pecas extends Controller
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+                $texturaBin = null;
+                if (!empty($_FILES['imagemTextura']['tmp_name'])) {
+                    $texturaBin =  base64_encode(file_get_contents($_FILES['imagemTextura']['tmp_name']));
+                }
+
                 $newPeca = [
                     'nome' => $_POST['nome'],
                     'descricao' => $_POST['descricao'],
                     'id_cor' => $_POST['id_cor'],
+                    'id_categoria' => $_POST['id_categoria'],
                     'id_marca' => $_POST['id_marca'],
                     'id_genero' => $_POST['id_genero'],
                     'preco' => $_POST['preco'],
                     'taxa_iva' => $_POST['taxa_iva'],
                     'taxa_desconto' => $_POST['taxa_desconto'],
                     'tridimensional' => $_POST['tridimensional'],
-                    'imagemTextura' => $_POST['imagemTextura']
+                    'imagemTextura' =>  $texturaBin
 
                 ];
 
@@ -68,9 +222,57 @@ class Pecas extends Controller
                     }
                 }
 
+                $fotos = []; // Array para armazenar as fotos
 
-                if ($erro == '') {
-                    $pecas->addPeca($newPeca);
+                if (isset($_FILES['fotos'])) {
+                    for ($a = 0; $a < count($_FILES['fotos']['name']); $a++) {
+                        $fotos[$a] = [
+                            'name' => $_FILES['fotos']['name'][$a],
+                            'tmp_name' => $_FILES['fotos']['tmp_name'][$a],
+                            'error' => $_FILES['fotos']['error'][$a],
+                            'size' => $_FILES['fotos']['size'][$a],
+                        ];
+                    }
+                }
+
+
+                if ($erro === '') {
+                    $pecaNow = $pecas->addPeca($newPeca);
+                    $id_peca = $pecaNow['id'];
+
+                    for ($i = 0; $i < count($fotos); $i++) {
+
+                        if ($fotos[$i]['error'] === UPLOAD_ERR_OK) {
+
+                            $nomeFormatado = $_POST['nome'] . '_' . $i;
+                            $extensao = pathinfo($fotos[$i]['name'], PATHINFO_EXTENSION);
+
+                            $caminhoFinal = 'assets/logos/roupas/' . $nomeFormatado . '.' . $extensao;
+
+                            if (move_uploaded_file($fotos[$i]['tmp_name'], $caminhoFinal)) {
+                                $newFoto = [
+                                    'nome_arquivo' => $nomeFormatado . '.' . $extensao
+                                ];
+
+                                $fotoNow = $fotosModel->addFoto($newFoto);
+                                $id_foto = $fotoNow['id'];
+
+                                $newPeca_Foto = [
+                                    'id_peca' => $id_peca,
+                                    'id_foto' => $id_foto
+                                ];
+
+                                $pecas_fotos->addPecas_fotos($newPeca_Foto);
+                            } else {
+                                $erro = 'Erro ao mover o arquivo ' . $fotos[$i]['name'] . '.';
+                            }
+                        } else {
+                            $erro = 'Erro no upload do arquivo ' . $fotos[$i]['name'] . '.';
+                        }
+                    }
+                }
+                if ($erro === '') {
+
                     header("Location: /websiteKornerSkateShop/admin/peca");
                     exit();
                 } else {

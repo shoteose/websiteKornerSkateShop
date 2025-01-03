@@ -38,7 +38,7 @@
         echo '<td class="align-middle">' . $media['titulo'] . '</td>';
         echo '<td class="align-middle">' . $media['descricao'] . '</td>';
         echo '<td class="align-middle">' . $media['url'] . '</td>';
-        echo '<td class="align-middle"><button type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . 'admin/marca/' . $media['id'] . '">Editar Marca</button></td>';
+        echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/media/editar/' . $media['id'] . '" >Editar Media</a></td>';
         echo '<td class="align-middle"><a class="btn btn-danger btn-outline-light"  data-bs-toggle="modal" data-bs-target="#modalEliminar" data-id="media:' . $media['id'] . '">Eliminar</a></td>';
         echo '</tr>';
       }

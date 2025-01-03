@@ -16,8 +16,8 @@
               <div class="col-6 col-md-2 mb-3">
                   <h5>INFORMAÇÃO</h5>
                   <ul class="nav flex-column">
-                      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Termos e Condições</a></li>
-                      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Política de Privacidade</a></li>
+                      <li class="nav-item mb-2"><a href="<?php echo $url_alias ?>/info/termoscondicoes" class="nav-link p-0 text-muted">Termos e Condições</a></li>
+                      <li class="nav-item mb-2"><a href="<?php echo $url_alias ?>/info/politica" class="nav-link p-0 text-muted">Política de Privacidade</a></li>
                   </ul>
               </div>
 

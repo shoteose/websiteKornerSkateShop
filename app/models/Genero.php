@@ -20,6 +20,11 @@ class Genero {
         return $this->db->execGet('genero/');
     }
 
+    public function updateGenero(array $data, $id)
+    {
+        return $this->db->execPut("genero/$id", $data);
+    }
+
     /**
      * Obter uma Genero por ID
      *

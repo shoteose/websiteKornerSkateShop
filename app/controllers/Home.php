@@ -11,10 +11,10 @@ class Home extends Controller
     $categorias = $this->model('Categoria');
     $generos = $this->model('Genero');
     $marcas = $this->model('Marca');
+    $peca = $pecas->getPecasComDesconto();
     $marca = $marcas->getMarcas();
     $genero = $generos->getGeneros();
 
-    $peca = $pecas->getPecas();
     $categoria = $categorias->getCategorias();
 
     $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);

@@ -33,6 +33,17 @@ class Pecas
         return $this->db->execGet("peca/categoria/$id");
     }
 
+    public function addPeca(array $data)
+    {
+
+        return $this->db->execPost("peca/", $data);
+    }
+
+    public function updatePeca(array $data, $id)
+    {
+        return $this->db->execPut("peca/$id", $data);
+    }
+
     public function getPecasByMarcaId($id)
     {
         return $this->db->execGet("peca/marca/$id");
@@ -40,7 +51,7 @@ class Pecas
 
     public function getPecasByGeneroId($id)
     {
-        return $this->db->execGet("peca/categoria/$id");
+        return $this->db->execGet("peca/genero/$id");
     }
 
     public function getPecasComDesconto()

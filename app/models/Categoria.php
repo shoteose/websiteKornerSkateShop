@@ -4,10 +4,12 @@ namespace app\models;
 
 use app\core\Db;
 
-class Categoria {
+class Categoria
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Db(); // Usa o novo Db para consumir a API
     }
 
@@ -16,7 +18,8 @@ class Categoria {
      *
      * @return array|null
      */
-    public function getCategorias() {
+    public function getCategorias()
+    {
         return $this->db->execGet('categoria/');
     }
 
@@ -26,8 +29,14 @@ class Categoria {
      * @param int $id
      * @return array|null
      */
-    public function getCategoriaById(int $id) {
+    public function getCategoriaById(int $id)
+    {
         return $this->db->execGet("categoria/$id");
+    }
+
+    public function updateCategoria(array $data, $id)
+    {
+        return $this->db->execPut("categoria/$id", $data);
     }
 
     /**
@@ -36,7 +45,8 @@ class Categoria {
      * @param array $data
      * @return array|null
      */
-    public function addCategoria(array $data) {
+    public function addCategoria(array $data)
+    {
         return $this->db->execPost('categoria/', $data);
     }
 
@@ -46,8 +56,8 @@ class Categoria {
      * @param int $id
      * @return array|null
      */
-    public function deleteCategoria(int $id) {
+    public function deleteCategoria(int $id)
+    {
         return $this->db->execDelete("categoria/$id");
     }
 }
-

@@ -70,6 +70,44 @@ class Genero extends Controller
             $this->pageNotFound();
         }
     }
+
+    public function editar($id = null)
+    {
+        if (is_numeric($id) && isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
+            $categorias = $this->model('Categoria');
+            $generos = $this->model('Genero');
+            $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
+            $categoria = $categorias->getCategorias();
+            $generoInd = $generos->getGeneroById($id);
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+                $newGenero = [
+                    'descricao' => $_POST['descricao']
+                ];
+
+                if ($generos->updateGenero($newGenero, $generoInd[0]['id'])) {
+                    header("Location: /websiteKornerSkateShop/admin/genero");
+                    exit();
+                } else {
+                    $erro = "Erro ao atualizar o género.";
+
+                    $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                    $this->view('generos/editar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'generoInd' => $generoInd, 'error' => $erro]);
+                    $this->view('shared/footer');
+                }
+            } else {
+                $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('generos/editar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'generoInd' => $generoInd]);
+                $this->view('shared/footer');
+            }
+        } else {
+            $this->pageNotFound();
+        }
+    }
 }
 
 // :: Scope Resolution Operator

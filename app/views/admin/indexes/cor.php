@@ -34,7 +34,7 @@
         echo '<tr>';
         echo '<th class="align-middle">' . $cor['id'] . '</th>';
         echo '<td class="align-middle">' . $cor['descricao'] . '</td>';
-        echo '<td class="align-middle"><button type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . 'cor/' . $cor['id'] . '">Editar Marca</button></td>';
+        echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/cor/editar/' . $cor['id'] . '" >Editar Cor</a></td>';
         echo '<td class="align-middle"><a class="btn btn-danger btn-outline-light"  data-bs-toggle="modal" data-bs-target="#modalEliminar" data-id="cor:' . $cor['id'] . '">Eliminar</a></td>';
         echo '</tr>';
       }

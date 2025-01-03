@@ -57,7 +57,7 @@
                         <a class="nav-link" href="<?php echo $url_alias; ?>/sales/">Sales %</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Loja 3D</a>
+                        <a class="nav-link" href="<?php echo $url_alias; ?>/loja/">Loja 3D</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $url_alias; ?>/media">Blog</a>

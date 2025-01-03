@@ -20,6 +20,11 @@ class Cor {
         return $this->db->execGet('cor/');
     }
 
+    public function updateCor(array $data, $id)
+    {
+        return $this->db->execPut("cor/$id", $data);
+    }
+
     /**
      * Obter uma Cor por ID
      *

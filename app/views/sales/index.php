@@ -11,7 +11,7 @@
       <div class="col">
         <a href="<?php echo $url_alias ?>/pecas/detalhes/<?php echo $peca['id'] ?>" class="text-decoration-none text-reset">
           <div class="card text-black h-100">
-            <img src="<?php echo $url_alias ?>/assets/logos/roupas/<?php echo $peca['nome'] ?>_0.png"
+            <img src="<?php echo $url_alias ?>/assets/logos/roupas/<?php echo $peca['nome_arquivo'] ?>"
               class="card-img-top" alt="Peca <?php echo $peca['nome'] ?>" />
             <div class="card-body d-flex flex-column">
               <div class="text-center">
@@ -20,7 +20,7 @@
               </div>
               <div>
                 <div class="d-flex justify-content-between">
-                  <span>Genero</span><span><?php echo $peca['genero'] ?></span>
+                  <span>Género</span><span><?php echo $peca['genero'] ?></span>
                 </div>
                 <?php if ($peca['taxa_desconto'] > 0) { ?>
                   <div class="d-flex justify-content-between">
@@ -33,7 +33,7 @@
                   </div>
                 <?php } else { ?>
                   <div class="d-flex justify-content-between">
-                    <span>Preco</span><span><?php echo number_format(($peca['preco'] * (1 - $peca['taxa_iva'])), 2, ",", "") ?> €</span>
+                  <span>Preço</span><span><?php echo number_format(($peca['preco'] * (1 - ($peca['taxa_iva'] / 100))), 2, ",", "") ?> €</span>
                   </div>
                 <?php } ?>
               </div>

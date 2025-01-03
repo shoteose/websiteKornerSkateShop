@@ -20,6 +20,11 @@ class Media {
         return $this->db->execGet('media/');
     }
 
+    public function updateMedia(array $data, $id)
+    {
+        return $this->db->execPut("media/$id", $data);
+    }
+
     /**
      * Obter uma Media por ID
      *

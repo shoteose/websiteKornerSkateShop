@@ -40,6 +40,10 @@ class Marca {
         return $this->db->execPost('marca/', $data);
     }
 
+    public function updateMarca(array $data, $id)
+    {
+        return $this->db->execPut("marca/$id", $data);
+    }
     /**
      * Deletar uma Marca por ID
      *

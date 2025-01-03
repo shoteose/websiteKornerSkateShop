@@ -95,4 +95,44 @@ class Media extends Controller
             $this->pageNotFound();
         }
     }
+
+    public function editar($id = null)
+    {
+        if (is_numeric($id) && isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
+            $categorias = $this->model('Categoria');
+            $generos = $this->model('Genero');
+            $genero = $generos->getGeneros();
+            $marcas = $this->model('Marca');
+            $marca = $marcas->getMarcas();
+            $categoria = $categorias->getCategorias();
+            $medias = $this->model('Media');
+            $mediaInd = $medias->getMediaById($id);
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                $newMedia = [
+                    'titulo' => $_POST['titulo'],
+                    'descricao' => $_POST['descricao'],
+                    'url' => $_POST['url']
+                ];
+
+                if ($medias->updateMedia($newMedia, $mediaInd[0]['id'])) {
+                    header("Location: /websiteKornerSkateShop/admin/media");
+                    exit();
+                } else {
+                    $erro = "Erro ao atualizar o media.";
+
+                    $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                    $this->view('media/editar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'corInd' => $mediaInd, 'error' => $erro]);
+                    $this->view('shared/footer');
+                }
+            } else {
+                $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
+                $this->view('media/editar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'mediaInd' => $mediaInd]);
+                $this->view('shared/footer');
+            }
+        } else {
+            $this->pageNotFound();
+        }
+    }
 }

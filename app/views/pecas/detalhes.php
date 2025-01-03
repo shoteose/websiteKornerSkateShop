@@ -78,7 +78,7 @@
                 <h1 class="pb-2">Preço</h1>
               </div>
               <div class="col-6">
-                <p class="preco-antigo">
+                <p class="preco-novo">
                   <span><?php echo number_format(($data['roupas'][0]['preco'] * (1 - ($data['roupas'][0]['taxa_iva'] / 100))), 2, ",", "") ?>€</span>
                 </p>
               </div>

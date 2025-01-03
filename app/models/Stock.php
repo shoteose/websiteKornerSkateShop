@@ -20,6 +20,11 @@ class Stock {
         return $this->db->execGet('stock/');
     }
 
+    public function updateStock(array $data, $id)
+    {
+        return $this->db->execPut("stock/$id", $data);
+    }
+
     /**
      * Obter uma Stock por ID
      *

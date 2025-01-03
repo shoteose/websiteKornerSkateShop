@@ -18,6 +18,11 @@ class Tamanho
         return $this->db->execGet('tamanho/');
     }
 
+    public function updateTamanho(array $data, $id)
+    {
+        return $this->db->execPut("tamanho/$id", $data);
+    }
+
     public function getTamanhoById(int $id)
     {
         return $this->db->execGet("tamanho/$id");

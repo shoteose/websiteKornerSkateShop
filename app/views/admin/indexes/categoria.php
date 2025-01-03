@@ -34,7 +34,7 @@
         echo '<tr>';
         echo '<th class="align-middle">' . $categoria['id'] . '</th>';
         echo '<td class="align-middle">' . $categoria['descricao'] . '</td>';
-        echo '<td class="align-middle"><button type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . 'categoria/' . $categoria['id'] . '">Editar Categoria</button></td>';
+        echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/categoria/editar/' . $categoria['id'] . '" >Editar Categoria</a></td>';
         echo '<td class="align-middle"><a class="btn btn-danger btn-outline-light"  data-bs-toggle="modal" data-bs-target="#modalEliminar" data-id="categoria:' . $categoria['id'] . '">Eliminar</a></td>';
         echo '</tr>';
       }
