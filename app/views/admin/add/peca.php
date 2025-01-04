@@ -41,9 +41,9 @@
 
           <div class="mb-3 col-3">
             <label for="id_categoria" class="form-label">Categoria</label>
-            <select class="form-select" id="id_categoria" name="id_categoria" required>
+            <select class="form-select" id="id_categoria" name="id_categoria" required onchange="mostrarTemplateCategoria()">
               <?php foreach ($data['categorias'] as $categoria) { ?>
-                <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['descricao']; ?></option>
+                <option value=" <?php echo $categoria['id']; ?>"><?php echo $categoria['descricao']; ?></option>
               <?php } ?>
             </select>
           </div>
@@ -92,7 +92,14 @@
         </div>
         <div class="mb-3" id="campoTextura" style="display: none;">
           <label for="imagemTextura" class="form-label">Imagem Textura</label>
+          <div id="templateContainer" style="display: none;">
+            <label>Textura Template</label>
+            <div id="templateImage">
+            </div>
+          </div>
+
           <input type="file" class="form-control" id="imagemTextura" name="imagemTextura">
+
         </div>
 
         <button type="submit" class="btn btn-primary">Adicionar</button>
@@ -109,6 +116,29 @@
       texturaField.style.display = 'block';
     } else {
       texturaField.style.display = 'none';
+    }
+  }
+
+  function mostrarTemplateCategoria() {
+    const categoriaSelect = document.getElementById('id_categoria');
+    const templateContainer = document.getElementById('templateContainer');
+    const templateImage = document.getElementById('templateImage');
+    const categoria = categoriaSelect.options[categoriaSelect.selectedIndex].text; // Nome da categoria selecionada
+
+    // Limpa o conteúdo atual
+    templateImage.innerHTML = '';
+
+    // Exibe o template correspondente à categoria
+    switch (categoria) {
+      case 'Tshirt':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias ; ?>/assets/logos/loja/template_tshirt.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+
+      default:
+        templateContainer.style.display = 'none';
+        break;
     }
   }
 </script>

@@ -117,7 +117,14 @@
 
           $binaryData = pack('C*', ...$peca['imagemTextura']['data']);
           $base64Image = base64_encode($binaryData);
-          echo '<div><label>Textura Atual</label></div><div><img src="data:image/png;base64,' . $base64Image . '" alt="Textura" style="max-width:75px;"></div>';
+          echo '<div><label>Textura Atual</label></div><div><img src="data:image/png;base64,' . $base64Image . '" alt="Textura" style="max-width:150px;"></div>';
+
+          switch ($peca['categoria']) {
+
+            case "Tshirt":
+              echo '<div><label>Textura Template</label></div><div><img src="' . $url_alias . '/assets/logos/loja/template_tshirt.png" alt="Textura Template" style="max-width:150px;"></div>';
+              break;
+          }
         }
         ?>
 
