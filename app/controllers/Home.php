@@ -11,7 +11,7 @@ class Home extends Controller
     $categorias = $this->model('Categoria');
     $generos = $this->model('Genero');
     $marcas = $this->model('Marca');
-    $peca = $pecas->getPecasComDesconto();
+    $peca = $pecas->getPecas();
     $marca = $marcas->getMarcas();
     $genero = $generos->getGeneros();
 

@@ -70,7 +70,7 @@
         <a href="<?php echo $url_alias; ?>/admin/media" class="text-decoration-none text-reset">
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Media</h5>
+                    <h5 class="card-title">Blog</h5>
                 </div>
             </div>
         </a>

@@ -76,7 +76,7 @@
           </div>
           <div class="mb-3 col-4">
             <label for="taxa_desconto" class="form-label">Taxa Desconto 0-100</label>
-            <input type="number" step="1" class="form-control" id="taxa_desconto" name="taxa_desconto">
+            <input type="number" step="1" class="form-control" id="taxa_desconto" name="taxa_desconto" value="0" required>
           </div>
         </div>
         <div>

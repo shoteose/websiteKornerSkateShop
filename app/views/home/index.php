@@ -81,7 +81,10 @@
                       </div>
                       <div>
                         <div class="d-flex justify-content-between">
-                          <span>Género</span><span><?php echo $peca['genero'] ?></span>
+                          <span>Marca</span><span><?php echo $peca['marca'] ?></span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <span>Categoria</span><span><?php echo $peca['categoria'] ?></span>
                         </div>
                         <?php if ($peca['taxa_desconto'] > 0) { ?>
                           <div class="d-flex justify-content-between">
@@ -94,9 +97,8 @@
                           </div>
                         <?php } else { ?>
                           <div class="d-flex justify-content-between">
-                            <span>Preco</span>
                             <span>Preço</span><span><?php echo number_format(($peca['preco'] * (1 - ($peca['taxa_iva'] / 100))), 2, ",", "") ?> €</span>
-                            </div>
+                          </div>
                         <?php } ?>
                       </div>
                     </div>
