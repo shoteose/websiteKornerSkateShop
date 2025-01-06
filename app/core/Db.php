@@ -13,35 +13,23 @@ class Db
     {
         $this->client = new Client([
             'base_uri' => 'http://localhost:3000/api/', // URL base da API
-            'timeout'  => 5.0, // Timeout em segundos
+            'timeout'  => 5.0, 
         ]);
     }
 
-    /**
-     * Método para executar requisições GET
-     *
-     * @param string $endpoint Endpoint da API
-     * @return array|null Resposta da API em formato de array ou null em caso de erro
-     */
+
     public function execGet(string $endpoint)
     {
         try {
             $response = $this->client->get($endpoint);
             return json_decode($response->getBody()->getContents(), true);
         } catch (RequestException $e) {
-            //echo "Erro na requisição GET: " . $e->getMessage();
             $mes = $e->getMessage();
             return $mes;
         }
     }
 
-    /**
-     * Método para executar requisições POST
-     *
-     * @param string $endpoint Endpoint da API
-     * @param array $data Dados a serem enviados
-     * @return array|null Resposta da API em formato de array ou null em caso de erro
-     */
+
     public function execPost(string $endpoint, array $data)
     {
         try {
@@ -67,12 +55,7 @@ class Db
         }
     }
 
-    /**
-     * Método para executar requisições DELETE
-     *
-     * @param string $endpoint Endpoint da API
-     * @return array|null Resposta da API em formato de array ou null em caso de erro
-     */
+
     public function execDelete(string $endpoint)
     {
         try {
@@ -84,13 +67,7 @@ class Db
         }
     }
 
-    /**
-     * Método para executar requisições PUT (se necessário)
-     *
-     * @param string $endpoint Endpoint da API
-     * @param array $data Dados a serem enviados
-     * @return array|null Resposta da API em formato de array ou null em caso de erro
-     */
+
     public function execPut(string $endpoint, array $data)
     {
         try {
