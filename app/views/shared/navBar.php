@@ -54,7 +54,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $url_alias; ?>/sales/">Sales %</a>
+                        <a class="nav-link" href="<?php echo $url_alias; ?>/sales/">Descontos %</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $url_alias; ?>/loja/">Loja 3D</a>
@@ -67,25 +67,25 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
                     <?php if (!isset($_SESSION['user_id_acess'])) { ?>
                         <li class="nav-item ">
-                            <a class="nav-link" href="<?php echo $url_alias; ?>/contas">Login
+                            <a class="nav-link" href="<?php echo $url_alias; ?>/contas">Conta
                                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/login.svg" class="img-fluid">
                             </a>
                         </li>
                     <?php } else if ($_SESSION['user_id_acess'] == 1) { ?>
 
                         <li class="nav-item">
-                            <a class="nav-link" class="nav-link" href="<?php echo $url_alias; ?>/admin">Dashboard
+                            <a class="nav-link" class="nav-link" href="<?php echo $url_alias; ?>/admin">Painel de Controlo
                                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/admin.svg" class="img-fluid">
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $url_alias; ?>/contas/perfil">Conta
+                            <a class="nav-link" href="<?php echo $url_alias; ?>/contas/perfil">Perfil
                                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/account.svg" class="img-fluid">
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">logout
+                            <a class="nav-link" href="<?php echo $url_alias; ?>/contas/logout" onclick="logout()">Sair da Conta
                                 <img src="<?php echo $url_alias; ?>/assets/logos/icons/logout.svg" class="img-fluid">
                             </a>
                         </li>

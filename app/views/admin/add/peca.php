@@ -83,6 +83,12 @@
           <label>Fotos</label>
           <input type="file" name="fotos[]" id="fotos" class="form-control" multiple required>
         </div>
+        <!-- URL TEXTURA TESTES [IDEIA BOA MAS AGORA NÂO HÀ TEMPO!!!]
+        <div class="mb-3">
+          <label for="imagemTexturaUrl" class="form-label">Imagem Textura URL</label>
+          <input type="file" name="fotoTextura" id="fotoTextura" class="form-control" required>
+        </div>
+              -->
         <div class="mb-3">
           <label for="tridimensional" class="form-label">Tridimensional</label>
           <select class="form-select" id="tridimensional" name="tridimensional" onchange="mostrarCampoTextura()" required>
@@ -132,7 +138,7 @@
     switch (categoria) {
       case 'Tshirt':
         templateImage.innerHTML = `
-        <img src="<?php echo $url_alias ; ?>/assets/logos/loja/template_tshirt.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_tshirt.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
         templateContainer.style.display = 'block';
         break;
 

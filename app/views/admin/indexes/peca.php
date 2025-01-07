@@ -31,7 +31,7 @@
         <th scope="col">Taxa Iva</th>
         <th scope="col">Desconto</th>
         <th scope="col">Tridimencional</th>
-        <th scope="col">Textura MAX 64KB</th>
+        <th scope="col">Textura MAX 40MB</th>
         <th scope="col">Editar Fotos</th>
         <th scope="col">Editar</th>
         <th scope="col">Eliminar</th>

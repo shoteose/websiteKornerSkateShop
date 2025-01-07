@@ -198,6 +198,8 @@ class Pecas extends Controller
                 $texturaBin = null;
                 if (!empty($_FILES['imagemTextura']['tmp_name'])) {
                     $texturaBin =  base64_encode(file_get_contents($_FILES['imagemTextura']['tmp_name']));
+                } else {
+                    die("Erro ao acessar o arquivo temporário.");
                 }
 
                 $newPeca = [
@@ -212,7 +214,6 @@ class Pecas extends Controller
                     'taxa_desconto' => $_POST['taxa_desconto'],
                     'tridimensional' => $_POST['tridimensional'],
                     'imagemTextura' =>  $texturaBin
-
                 ];
 
                 foreach ($peca as $p) {
@@ -234,10 +235,34 @@ class Pecas extends Controller
                         ];
                     }
                 }
+                /*
+                if (isset($_FILES['fotoTextura']) && $_FILES['fotoTextura']['error'] === UPLOAD_ERR_OK) {
 
+                    // vai vuscar o nome original da foto
+                    $imagem_nome = $_POST['nome'] . '_Textura';
+                    $extensao = pathinfo($_FILES['fotoTextura']['name'], PATHINFO_EXTENSION);
+                    // caminho temporário da imagem no servidor
+                    $imagem_tmp = $_FILES['fotoTextura']['tmp_name'];
 
+                    // defino o caminho final da imagem
+                    $destino = 'assets/logos/texturas/' . $imagem_nome . '.' . $extensao;
+                    if (move_uploaded_file($imagem_tmp, $destino)) {
+                        $newPeca['urltextura'] = $destino;
+                    }else{
+                        $erro = 'Erro no upload do arquivo ';
+                    }
+                    // move a iamegm do local temporário para o destino final
+                }
+
+*/
                 if ($erro === '') {
+                    var_dump($newPeca);
                     $pecaNow = $pecas->addPeca($newPeca);
+                    if (!$pecaNow) {
+                        error_log("Erro ao inserir nova peça no banco de dados.");
+                        die("Erro ao salvar no banco de dados.");
+                    }
+                    
                     $id_peca = $pecaNow['id'];
 
                     for ($i = 0; $i < count($fotos); $i++) {
@@ -272,7 +297,7 @@ class Pecas extends Controller
                     }
                 }
                 if ($erro === '') {
-
+                    
                     header("Location: /websiteKornerSkateShop/admin/peca");
                     exit();
                 } else {

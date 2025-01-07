@@ -1,5 +1,5 @@
 <div class="row text-center justify-content-center" style="height:50px; background-color:red;"><a href="<?php echo $url_alias ?>/loja">
-    <h3> Visite a Loja 3D!! Melhor Imersão!!</h3>
+    <h3 class="text-center justify-content-center"> Visite a Loja 3D!! Melhor Imersão!!</h3>
   </a></div>
 
 <!-- INICIO DO CONTEUDO -->
