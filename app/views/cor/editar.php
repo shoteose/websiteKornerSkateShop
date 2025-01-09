@@ -9,7 +9,7 @@
     </div>
 
     <div class="col-2">
-        <a href="<?php echo $url_alias ?>/admin/cor/<?php echo $data['corInd'][0]['id'] ?>" type="button" class="btn btn-outline-dark col-4 mt-4">Voltar</a>
+        <a href="<?php echo $url_alias ?>/admin/cor/" type="button" class="btn btn-outline-dark col-4 mt-4">Voltar</a>
     </div>
 
     <div class="row">
