@@ -1,7 +1,6 @@
 <!-- INICIO DO CONTEUDO -->
 
 <div class="container">
-
   <div class="row">
     <div class="col-12">
       <h1 class="text-center mt-5">Adicionar Stock</h1>
@@ -13,7 +12,6 @@
   </div>
 
   <div class="row">
-    <!-- Mensagem de erro -->
     <?php if (!empty($data['error'])) { ?>
       <div class="alert alert-danger text-center" role="alert">
         <?php echo $data['error']; ?>
@@ -34,7 +32,7 @@
           <div class="row mb-3">
             <div class="col-6">
               <label for="id_tamanho" class="form-label">Tamanho</label>
-              <select class="form-select" id="id_tamanho" name="tamanhos[0][id_tamanho]" required>
+              <select class="form-select" name="tamanhos[0][id_tamanho]" required>
                 <?php foreach ($data['tamanhos'] as $tamanho) { ?>
                   <option value="<?php echo $tamanho['id']; ?>"><?php echo $tamanho['descricao']; ?></option>
                 <?php } ?>
@@ -42,7 +40,7 @@
             </div>
             <div class="col-6">
               <label for="quantidade" class="form-label">Quantidade</label>
-              <input type="number" step="1" class="form-control" id="quantidade" name="tamanhos[0][quantidade]" required>
+              <input type="number" step="1" class="form-control" name="tamanhos[0][quantidade]" required>
             </div>
           </div>
         </div>
@@ -57,19 +55,18 @@
       </form>
     </div>
   </div>
-
 </div>
 
 <script>
   document.getElementById('add-tamanho-btn').addEventListener('click', function() {
     const container = document.getElementById('tamanho-quantidade-container');
-    const index = container.children.length; // Conta os grupos já existentes
+    const index = container.querySelectorAll('.row').length;
 
     const newRow = `
       <div class="row mb-3">
         <div class="col-6">
           <label for="id_tamanho" class="form-label">Tamanho</label>
-          <select class="form-select" id="id_tamanho_${index}" name="tamanhos[${index}][id_tamanho]" required>
+          <select class="form-select" name="tamanhos[${index}][id_tamanho]" required>
             <?php foreach ($data['tamanhos'] as $tamanho) { ?>
               <option value="<?php echo $tamanho['id']; ?>"><?php echo $tamanho['descricao']; ?></option>
             <?php } ?>
@@ -77,11 +74,10 @@
         </div>
         <div class="col-6">
           <label for="quantidade" class="form-label">Quantidade</label>
-          <input type="number" step="1" class="form-control" id="quantidade_${index}" name="tamanhos[${index}][quantidade]" required>
+          <input type="number" step="1" class="form-control" name="tamanhos[${index}][quantidade]" required>
         </div>
       </div>
     `;
-
     container.insertAdjacentHTML('beforeend', newRow);
   });
 </script>

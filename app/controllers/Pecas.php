@@ -74,6 +74,8 @@ class Pecas extends Controller
                     'imagemTextura' => $texturaBin
                 ];
 
+
+
                 if ($pecas->updatePeca($newPeca, $peca[0]['id'])) {
                     header("Location: /websiteKornerSkateShop/admin/peca");
                     exit();
@@ -198,8 +200,6 @@ class Pecas extends Controller
                 $texturaBin = null;
                 if (!empty($_FILES['imagemTextura']['tmp_name'])) {
                     $texturaBin =  base64_encode(file_get_contents($_FILES['imagemTextura']['tmp_name']));
-                } else {
-                    die("Erro ao acessar o arquivo temporário.");
                 }
 
                 $newPeca = [
@@ -254,15 +254,14 @@ class Pecas extends Controller
                     // move a iamegm do local temporário para o destino final
                 }
 
-*/
+                */
                 if ($erro === '') {
-                    var_dump($newPeca);
                     $pecaNow = $pecas->addPeca($newPeca);
                     if (!$pecaNow) {
-                        error_log("Erro ao inserir nova peça no banco de dados.");
-                        die("Erro ao salvar no banco de dados.");
+                        error_log("Erro ao inserir nova peça na base de dados.");
+                        die("Erro ao salvar na base de dados.");
                     }
-                    
+
                     $id_peca = $pecaNow['id'];
 
                     for ($i = 0; $i < count($fotos); $i++) {
@@ -297,7 +296,7 @@ class Pecas extends Controller
                     }
                 }
                 if ($erro === '') {
-                    
+
                     header("Location: /websiteKornerSkateShop/admin/peca");
                     exit();
                 } else {

@@ -9,7 +9,7 @@
     </div>
 
     <div class="col-2">
-        <a href="<?php echo $url_alias ?>/admin/media/<?php echo $data['mediaInd'][0]['id'] ?>" type="button" class="btn btn-outline-dark col-4 mt-4">Voltar</a>
+        <a href="<?php echo $url_alias ?>/admin/media/" type="button" class="btn btn-outline-dark col-4 mt-4">Voltar</a>
     </div>
 
     <div class="row">
@@ -30,8 +30,8 @@
                     <textarea class="form-control" id="descricao" name="descricao" rows="3" required><?php echo $data['mediaInd'][0]['descricao'] ?></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="url" class="form-label">Descricão</label>
-                    <input type="text" class="form-control" id="url" name="url" value="<?php echo $data['mediaInd'][0]['url'] ?>" required>
+                    <label for="url" class="form-label">Youtube/Instagram URL</label>
+                    <input type="text" class="form-control" id="url" name="url" value="<?php echo $data['mediaInd'][0]['url'] ?>" >
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar Alterações</button>
             </form>

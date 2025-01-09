@@ -61,10 +61,10 @@
         }
 
         if (!empty($peca['imagemTextura']['data'])) {
-          $binaryData = pack('C*', ...$peca['imagemTextura']['data']);
+          $dadosBinario = pack('C*', ...$peca['imagemTextura']['data']);
           // Converte a string binária para Base64
-          $base64Image = base64_encode($binaryData);
-          echo '<td class="align-middle"><img src="data:image/png;base64,' . $base64Image  . '" alt="Textura" style="max-width:75px;"></td>';
+          $base64Imagem = base64_encode($dadosBinario);
+          echo '<td class="align-middle"><img src="data:image/png;base64,' . $base64Imagem  . '" alt="Textura" style="max-width:75px;"></td>';
         } else {
           echo '<td class="align-middle">Sem textura</td>';
         }

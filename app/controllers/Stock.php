@@ -7,9 +7,7 @@ class Stock extends Controller
 
     public function add()
     {
-
         if (isset($_SESSION['user_id_acess']) && $_SESSION['user_id_acess'] == 1) {
-
             $categorias = $this->model('Categoria');
             $generos = $this->model('Genero');
             $genero = $generos->getGeneros();
@@ -17,39 +15,43 @@ class Stock extends Controller
             $marca = $marcas->getMarcas();
             $categoria = $categorias->getCategorias();
             $stocks = $this->model('Stock');
-            $stock = $stocks->getStock();
-
+            $tamanhos = $this->model('Tamanho');
             $pecas = $this->model('Pecas');
-            $stocks = $this->model('Tamanho');
             $peca = $pecas->getPecas();
-            $stock = $stocks->getTamanhos();
-
+            $tamanho = $tamanhos->getTamanhos();
+    
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $id_peca = $_POST['id_peca'];
-                $stocks = $_POST['stocks'];
-
-                foreach ($stocks as $tam) {
+                $tamanhos = $_POST['tamanhos']; // Array com tamanhos e quantidades
+    
+                foreach ($tamanhos as $tam) {
                     $newTam = [
                         'id_peca' => $id_peca,
-                        'id_stock' => $tam['id_stock'],
-                        'quantidade' => $tam['quantidade'],
+                        'id_tamanho' => $tam['id_tamanho'],
+                        'quantidade' => $tam['quantidade']
                     ];
-                    
-                    $stocks->addStock($newTam);
+    
+                    $stocks->addStock($newTam); // Adiciona ao banco
                 }
-
+    
                 header("Location: /websiteKornerSkateShop/admin/stock");
                 exit();
             } else {
                 $this->view('shared/navBar', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca]);
-                $this->view('admin/add/stock', ['categorias' => $categoria, 'generos' => $genero, 'marcas' => $marca, 'pecas' => $peca, 'stocks' => $stock,]);
+                $this->view('admin/add/stock', [
+                    'categorias' => $categoria,
+                    'generos' => $genero,
+                    'marcas' => $marca,
+                    'pecas' => $peca,
+                    'tamanhos' => $tamanho
+                ]);
                 $this->view('shared/footer');
             }
         } else {
-
             $this->pageNotFound();
         }
     }
+    
 
     public function editar($id = null)
     {
