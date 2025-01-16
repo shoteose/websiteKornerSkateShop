@@ -113,10 +113,23 @@ class Pecas extends Controller
             $cores = $this->model('Cor');
             $cor = $cores->getCores();
             $peca = $pecas->getPecaById($id);
-            $pecaas_fotos = $pecas_fotos->getPecas_fotos($id);
-
+            $pecaas_fotos = $pecas_fotos->getPecas_fotosById($id);
+            
             $quantidadeFotos = count($pecaas_fotos) + 1;
 
+            $id_peca = $id;
+
+            if($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['caminho'])){
+
+                $id_foto = $pecaas_fotos[$_POST['caminho']]['id_foto'];
+                $fotosModel->deleteFoto($id_foto);
+                //$pecas_fotos->deletePecas_fotos($id_foto);
+
+                header("Location: /websiteKornerSkateShop/pecas/fotos/$id");
+                exit();
+
+            }
+            
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fotos'])) {
 
                 $fotos = [];
@@ -133,7 +146,7 @@ class Pecas extends Controller
                     }
                 }
 
-                $id_peca = $id;
+                
 
                 for ($i = 0; $i <  count($fotos); $i++) {
 

@@ -28,11 +28,11 @@
         <th scope="col">Categoria</th>
         <th scope="col">Género</th>
         <th scope="col">Preço</th>
-        <th scope="col">Taxa Iva</th>
+        <th scope="col">Iva</th>
         <th scope="col">Desconto</th>
         <th scope="col">Tridimencional</th>
-        <th scope="col">Textura MAX 40MB</th>
-        <th scope="col">Editar Fotos</th>
+        <th scope="col">Textura</th>
+        <th scope="col">Fotos</th>
         <th scope="col">Editar</th>
         <th scope="col">Eliminar</th>
       </tr>
@@ -68,7 +68,7 @@
         } else {
           echo '<td class="align-middle">Sem textura</td>';
         }
-        echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/pecas/fotos/' . $peca['id'] . '" >Editar foto</a></td>';
+        echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/pecas/fotos/' . $peca['id'] . '" >Editar fotos</a></td>';
         echo '<td class="align-middle"><a type="button" class="btn btn-primary btn-outline-light" href="' . $url_alias . '/pecas/editar/' . $peca['id'] . '" >Editar Peça</a></td>';
         echo '<td class="align-middle"><a class="btn btn-danger btn-outline-light"  data-bs-toggle="modal" data-bs-target="#modalEliminar" data-id="peca:' . $peca['id'] . '">Eliminar</a></td>';
         echo '</tr>';

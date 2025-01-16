@@ -129,7 +129,7 @@
     const categoriaSelect = document.getElementById('id_categoria');
     const templateContainer = document.getElementById('templateContainer');
     const templateImage = document.getElementById('templateImage');
-    const categoria = categoriaSelect.options[categoriaSelect.selectedIndex].text; // Nome da categoria selecionada
+    const categoria = categoriaSelect.options[categoriaSelect.selectedIndex].text;
 
     // Limpa o conteúdo atual
     templateImage.innerHTML = '';
@@ -141,6 +141,28 @@
         <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_tshirt.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
         templateContainer.style.display = 'block';
         break;
+
+      case 'Gorro':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_gorro.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+      case 'Hoodie':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/hoodie_template.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+      case 'Sweatshirt':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_sweat.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+      case 'Casaco Almofadado':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_puff.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+
 
       default:
         templateContainer.style.display = 'none';

@@ -47,7 +47,7 @@
 
           <div class="mb-3 col-3">
             <label for="id_categoria" class="form-label">Categoria</label>
-            <select class="form-select" id="id_categoria" name="id_categoria" required>
+            <select class="form-select" id="id_categoria" name="id_categoria" required onchange="mostrarTemplateCategoria()">
               <?php foreach ($data['categorias'] as $categoria) { ?>
                 <?php if ($categoria['id'] == $peca['id_categoria']) {
                   echo '<option value="' . $categoria['id'] . '" selected >' . $categoria['descricao'] . ' </option>';
@@ -118,18 +118,36 @@
           $binaryData = pack('C*', ...$peca['imagemTextura']['data']);
           $base64Image = base64_encode($binaryData);
           echo '<div><label>Textura Atual</label></div><div><img src="data:image/png;base64,' . $base64Image . '" alt="Textura" style="max-width:150px;"></div>';
-
+          /*
           switch ($peca['categoria']) {
 
             case "Tshirt":
               echo '<div><label>Textura Template</label></div><div><img src="' . $url_alias . '/assets/logos/loja/template_tshirt.png" alt="Textura Template" style="max-width:150px;"></div>';
               break;
+            case "Gorro":
+              echo '<div><label>Textura Template</label></div><div><img src="' . $url_alias . '/assets/logos/loja/template_gorro.png" alt="Textura Template" style="max-width:150px;"></div>';
+              break;
+            case "Hoodie":
+              echo '<div><label>Textura Template</label></div><div><img src="' . $url_alias . '/assets/logos/loja/hoodie_template.png" alt="Textura Template" style="max-width:150px;"></div>';
+              break;
+            case "Sweatshirt":
+              echo '<div><label>Textura Template</label></div><div><img src="' . $url_alias . '/assets/logos/loja/template_sweat.png" alt="Textura Template" style="max-width:150px;"></div>';
+              break;
+            case "Tshirt":
+              echo '<div><label>Textura Template</label></div><div><img src="' . $url_alias . '/assets/logos/loja/template_tshirt.png" alt="Textura Template" style="max-width:150px;"></div>';
+              break;
           }
+          */
         }
         ?>
 
         <div class="mb-3" id="campoTextura">
           <label for="imagemTextura" class="form-label"> Escolha uma nova para mudar a Textura</label>
+          <div id="templateContainer" style="display: none;">
+            <label>Textura Template</label>
+            <div id="templateImage">
+            </div>
+          </div>
           <input type="file" class="form-control" id="imagemTextura" name="imagemTextura">
         </div>
 
@@ -160,6 +178,51 @@
       texturaField.style.display = 'block';
     } else {
       texturaField.style.display = 'none';
+    }
+  }
+
+  function mostrarTemplateCategoria() {
+    const categoriaSelect = document.getElementById('id_categoria');
+    const templateContainer = document.getElementById('templateContainer');
+    const templateImage = document.getElementById('templateImage');
+    const categoria = categoriaSelect.options[categoriaSelect.selectedIndex].text;
+
+    // Limpa o conteúdo atual
+    templateImage.innerHTML = '';
+
+    // Exibe o template correspondente à categoria
+    switch (categoria) {
+      case 'Tshirt':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_tshirt.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+
+      case 'Gorro':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_gorro.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+      case 'Hoodie':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/hoodie_template.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+      case 'Sweatshirt':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_sweat.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+      case 'Casaco Almofadado':
+        templateImage.innerHTML = `
+        <img src="<?php echo $url_alias; ?>/assets/logos/loja/template_puff.png" alt="Template Tshirt"  class="mb-2" style="max-width: 150px;">`;
+        templateContainer.style.display = 'block';
+        break;
+
+
+      default:
+        templateContainer.style.display = 'none';
+        break;
     }
   }
 </script>

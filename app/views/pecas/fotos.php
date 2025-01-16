@@ -25,6 +25,7 @@
                 <tbody>
                     <?php
                     $caminhos = explode(',', $data['peca'][0]['caminhos_fotos']);
+                    $counter = 0;
                     foreach ($caminhos as $caminho) {
                         $caminho = trim($caminho) ?>
 
@@ -32,7 +33,7 @@
                             <td><img src="<?php echo $url_alias; ?>/assets/logos/roupas/<?php echo $caminho; ?>" alt="Foto" style="width: 100px;"></td>
                             <td>
                                 <form action="<?php echo $url_alias; ?>/pecas/fotos/<?php echo $data['peca'][0]['id']; ?>" method="post" class="d-inline">
-                                    <input type="hidden" name="caminho" value="<?php echo $caminho; ?>">
+                                    <input type="hidden" name="caminho" value="<?php echo $counter; $counter++; ?>">
                                     <button type="submit" class="btn btn-danger">Remover</button>
                                 </form>
                             </td>
