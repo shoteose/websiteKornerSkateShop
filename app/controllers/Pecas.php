@@ -122,9 +122,9 @@ class Pecas extends Controller
             if($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['caminho'])){
 
                 $id_foto = $pecaas_fotos[$_POST['caminho']]['id_foto'];
+                var_dump($id_foto);
                 $fotosModel->deleteFoto($id_foto);
                 //$pecas_fotos->deletePecas_fotos($id_foto);
-
                 header("Location: /websiteKornerSkateShop/pecas/fotos/$id");
                 exit();
 
