@@ -1,8 +1,11 @@
 <!-- INICIO DO CONTEUDO -->
 
 <div class="container">
-
-  <a href="javascript: history.go(-1)" class="m-2">Voltar</a>
+  <div class="row">
+    <div class="col-2">
+      <a href="javascript: history.go(-1)" type="button" class="btn btn-outline-dark col-4 mt-4">Voltar</a>
+    </div>
+  </div>
 
   <div class="row p-4 gy-4">
     <div class="col-md-6 col-12">
